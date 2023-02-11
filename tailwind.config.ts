@@ -11,14 +11,15 @@ module.exports = {
         './app.vue',
     ],
     theme: {
-        extend: {},
-        colors: {
-            'bitter-sweet': '#FB7B64',
-            'raisin-black': '#221D23',
-            'cafe-noir': '#4F3824',
-            'gold-metallic': '#DDB967',
-            'yellow-green-crayola': '#D0E37F',
-            'almost-white': '#FEFEFE',
+        extend: {
+            colors: {
+                'bitter-sweet': '#FB7B64',
+                'raisin-black': '#221D23',
+                'cafe-noir': '#4F3824',
+                'gold-metallic': '#DDB967',
+                'yellow-green-crayola': '#D0E37F',
+                'almost-white': '#FEFEFE',
+            },
         },
     },
     plugins: [],
