@@ -2,4 +2,5 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "prettier.configPath": ".prettierrc",
     "tailwindCSS.experimental.configFile": "tailwind.config.ts",
+    "editor.formatOnSave": true
 }

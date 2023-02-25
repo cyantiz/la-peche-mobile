@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
+import { NButton, NTabs, NTabPane, NImageGroup, NSpace, NImage } from 'naive-ui'
 import { useCounterStore } from '~/store/counter'
 
 const counter = useCounterStore()
@@ -9,7 +9,7 @@ const increment = () => counter.increment()
 
 <template>
     <div class="mx-auto flex flex-col items-center">
-        <div class="text-3xl p-4 text-center">
+        <div class="p-4 text-center text-3xl">
             Nuxt 3 + NaiveUI + Tailwind + Pinia
         </div>
 
@@ -19,19 +19,26 @@ const increment = () => counter.increment()
 
         <draggable-box />
 
+        <div class="my-10">
+            <n-image-group show-toolbar-tooltip>
+                <n-space>
+                    <n-image
+                        width="100"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png"
+                    />
+                </n-space>
+            </n-image-group>
+        </div>
         <div>
-            <div class="pb-4 text-xs">Lorem ipsum dolor sit, amet</div>
-            <div class="pb-4 text-sm">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-base">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-lg">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-2xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-3xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-4xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-5xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-6xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-7xl">Lorem ipsum dolor sit amet</div>
-            <div class="pb-4 text-8xl">Lorem ipsum dolor sit amet</div>
+            <n-tabs type="segment">
+                <n-tab-pane name="oasis" tab="Oasis"> Wonderwall </n-tab-pane>
+                <n-tab-pane name="the beatles" tab="The Beatles">
+                    Hey Jude
+                </n-tab-pane>
+                <n-tab-pane name="jay chou" tab="Jay Chou">
+                    Qilixiang
+                </n-tab-pane>
+            </n-tabs>
         </div>
     </div>
 </template>
