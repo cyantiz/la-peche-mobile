@@ -1,5 +1,8 @@
 <div align="center">
-    <img src="assets/img/logo640text.png" width=20%>
+    <h2>La Pêche - Dating platform</div>    
+    <div align="center">
+        <img src="assets/img/logo640text.png" width=20%>
+    </div>
 </div>
 
 ## Nuxt 3 Minimal Starter
