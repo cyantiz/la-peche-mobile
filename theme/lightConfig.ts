@@ -10,6 +10,8 @@ const themeOverrides: GlobalThemeOverrides = {
         textColor2: color.RaisinBlack,
         textColor3: color.RaisinBlack,
         textColorBase: color.RaisinBlack,
+        fontFamily: 'Roboto, sans-serif',
+        borderRadius: '8px',
     },
 }
 
