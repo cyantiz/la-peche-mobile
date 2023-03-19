@@ -1,8 +1,15 @@
-# Nuxt 3 Minimal Starter
+<div align="center">
+    <h2>La Pêche - Dating platform</div>    
+    <div align="center">
+        <img src="assets/img/logo640-text-under.png" width=20%>
+    </div>
+</div>
+
+## Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+### Setup
 
 Please use Node version 18.13.0.
 
@@ -19,7 +26,7 @@ Make sure to install the dependencies:
 npm install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on http://localhost:3000
 
@@ -27,7 +34,7 @@ Start the development server on http://localhost:3000
 npm run dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 

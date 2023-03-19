@@ -11,6 +11,10 @@ module.exports = {
         './app.vue',
     ],
     theme: {
+        fontFamily: {
+            sans: ['Roboto', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+        },
         extend: {
             colors: {
                 'bitter-sweet': '#FB7B64',
@@ -19,6 +23,9 @@ module.exports = {
                 'gold-metallic': '#DDB967',
                 'yellow-green-crayola': '#D0E37F',
                 'almost-white': '#FEFEFE',
+                inactive: '#687079',
+                'inactive-base': '#F8FAFB',
+
             },
         },
     },
