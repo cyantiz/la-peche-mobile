@@ -53,33 +53,21 @@ const isCollapsedSidebar = computed(
 const isMobile = breakPoints.smallerOrEqual('md')
 
 onMounted(async () => {
+    if (!process.client) return
+
     loadingBar.start()
-    if (process.client) {
-        await new Promise<void>((resolve) => {
-            setTimeout(() => {
-                resolve()
-            }, 400)
-        })
-        isShowLayoutCurtain.value = false
-    }
+    await new Promise<void>((resolve) => {
+        setTimeout(() => {
+            resolve()
+        }, 400)
+    })
+    isShowLayoutCurtain.value = false
 })
 
-watch(
-    () => isShowLayoutCurtain.value || isAuthLoading.value,
-    (val) => {
-        if (!val) loadingBar.finish()
-    }
-)
-
-// const router = useRouter()
-
-// router.beforeEach(() => {
-//     loadingBar.start()
-// })
-
-// router.afterEach(() => {
-//     loadingBar.finish()
-// })
+const router = useRouter()
+router.beforeEach(() => {
+    loadingBar.start()
+})
 </script>
 
 <style lang="less" scoped>

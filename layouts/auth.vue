@@ -26,20 +26,25 @@
 <script lang="ts" setup>
 import { useLoadingBar } from 'naive-ui'
 
+const router = useRouter()
 const loadingBar = useLoadingBar()
 
 const isShowLayoutCurtain = ref<boolean>(true)
 onMounted(async () => {
+    if (!process.client) return
+
     loadingBar.start()
-    if (process.client) {
-        await new Promise<void>((resolve) => {
-            setTimeout(() => {
-                resolve()
-            }, 400)
-        })
-        isShowLayoutCurtain.value = false
-        loadingBar.finish()
-    }
+    await new Promise<void>((resolve) => {
+        setTimeout(() => {
+            resolve()
+        }, 400)
+    })
+    isShowLayoutCurtain.value = false
+    loadingBar.finish()
+})
+
+router.beforeEach(() => {
+    loadingBar.start()
 })
 </script>
 

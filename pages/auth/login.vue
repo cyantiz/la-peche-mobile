@@ -80,6 +80,11 @@ function submitForm(e: Event) {
 function loginWithGoogle() {
     // console.log('Login with Google')
 }
+
+onMounted(() => {
+    if (!process.client) return
+    setTimeout(() => loadingBar.finish(), 1)
+})
 </script>
 
 <template>

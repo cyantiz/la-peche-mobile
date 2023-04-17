@@ -52,7 +52,7 @@ const textSize = computed(() => TEXT_SIZES[props.size])
     >
         <img
             src="~/assets/img/logo256.png"
-            alt="logo"
+            alt=""
             class="object-cover"
             :style="{ width: `${imgSize}px`, height: `${imgSize}px` }"
         />

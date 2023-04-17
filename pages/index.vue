@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import { useLoadingBar } from 'naive-ui'
 import { useAuthStore } from '~/store/auth'
 useHead({
     title: 'Explore',
 })
 definePageMeta({
     layout: 'default',
-    collapsed: true,
 })
 
 const auth = useAuthStore()
 const user = computed(() => auth.user)
+
+const loadingBar = useLoadingBar()
+onMounted(() => {
+    if (!process.client) return
+    setTimeout(() => loadingBar.finish(), 1)
+})
 </script>
 
 <template>

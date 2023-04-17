@@ -1,21 +1,25 @@
 <script setup lang="ts">
+import { useLoadingBar } from 'naive-ui'
 import { useAuthStore } from '@/store/auth'
 defineProps<{}>()
 
 const { user } = useAuthStore()
 
 // test asyncData
-const { data, pending, error } = await useAsyncData<UserInformation>(
-    async () => {
-        // fake loading 1000ms
-        await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(this)
-            }, 1000)
-        })
-        return useApiGet<UserInformation>(`/users/info/${user.username}`)
-    }
-)
+const { data, pending, error } = await useAsyncData<UserInformation>(() => {
+    // fake loading 1000ms
+    // await new Promise((resolve) => {
+    //     setTimeout(() => {
+    //         resolve(this)
+    //     }, 1000)
+    // })
+    return useApiGet<UserInformation>(`/users/info/${user.username}`)
+})
+const loadingBar = useLoadingBar()
+onMounted(() => {
+    if (!process.client) return
+    setTimeout(() => loadingBar.finish(), 1)
+})
 </script>
 
 <template>

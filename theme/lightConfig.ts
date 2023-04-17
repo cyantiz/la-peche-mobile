@@ -15,6 +15,9 @@ const themeOverrides: GlobalThemeOverrides = {
         fontFamily: 'Roboto, sans-serif',
         borderRadius: '8px',
     },
+    LoadingBar: {
+        height: '3px',
+    },
 }
 
 export default themeOverrides

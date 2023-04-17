@@ -76,6 +76,11 @@ function submitForm(e: Event) {
         }
     })
 }
+
+onMounted(() => {
+    if (!process.client) return
+    setTimeout(() => loadingBar.finish(), 1)
+})
 </script>
 
 <template>
@@ -104,7 +109,7 @@ function submitForm(e: Event) {
                 <NFormItem label="Email" path="email" required>
                     <NInput
                         v-model:value="form.email"
-                        placeholder="abc@domain.com"
+                        placeholder="email@domain.com"
                         @keydown.enter.prevent
                     />
                 </NFormItem>

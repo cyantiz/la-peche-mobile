@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum Color {
     RaisinBlack = '#221D23',
     CafeNoir = '#4F3824',
