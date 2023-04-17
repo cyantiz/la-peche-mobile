@@ -19,12 +19,20 @@ export const useAuthStore = defineStore({
     id: 'auth',
     state: () =>
         ({
-            access_token: useCookie('access_token').value || '',
+            access_token: '',
             user: {},
             loading: true,
         } as AuthData),
     getters: {
         isAuth(): Boolean {
+            const refreshToken = useCookie('refresh_token').value
+            if (!refreshToken) return false
+
+            const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
+
+            if (!refreshTokenPayload) return false
+            if (refreshTokenPayload.exp * 1000 < Date.now()) return false
+
             return this.access_token !== ''
         },
         bearerToken(): string {
@@ -38,9 +46,6 @@ export const useAuthStore = defineStore({
                 body: formData,
             })
 
-            useCookie('access_token', {
-                sameSite: 'strict',
-            }).value = data.accessToken
             useCookie('refresh_token', {
                 sameSite: 'strict',
             }).value = data.refreshToken
@@ -53,12 +58,28 @@ export const useAuthStore = defineStore({
 
         async refreshToken() {
             try {
+                const refreshToken = useCookie('refresh_token').value
+
+                if (!refreshToken) return
+
+                const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
+
+                if (!refreshTokenPayload) {
+                    this.logout()
+                    return
+                }
+
+                if (refreshTokenPayload.exp * 1000 < Date.now()) {
+                    this.logout()
+                    return
+                }
+
                 const data = await useApiPost<{
                     accessToken: string
                 }>('/auth/refresh', {
                     method: 'POST',
                     body: {
-                        refreshToken: useCookie('refresh_token').value,
+                        refreshToken,
                     },
                 })
 
@@ -67,10 +88,9 @@ export const useAuthStore = defineStore({
 
                 this.access_token = data.accessToken
                 this.user = payload
-                useCookie('access_token', {
-                    sameSite: 'strict',
-                }).value = data.accessToken
-            } catch (error) {}
+            } catch (error) {
+                this.logout()
+            }
         },
 
         async initAuth() {
@@ -78,9 +98,14 @@ export const useAuthStore = defineStore({
             try {
                 await this.refreshToken()
             } catch (err) {
-                console.log(err)
+                this.logout()
             }
             this.loading = false
+
+            // set interval to refresh token
+            setInterval(() => {
+                this.refreshToken()
+            }, 1000 * 30 * 60)
         },
 
         async register(formData: RegisterRequestBody) {
@@ -102,14 +127,12 @@ export const useAuthStore = defineStore({
         },
 
         logout() {
-            useCookie('access_token', {
-                sameSite: 'strict',
-            }).value = ''
             useCookie('refresh_token', {
                 sameSite: 'strict',
             }).value = ''
-            this.$reset()
-            location.replace('/auth/login')
+            if (process.client) {
+                location.replace('/auth/login')
+            }
         },
     },
 })

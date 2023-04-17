@@ -67,7 +67,6 @@ function submitForm(e: Event) {
             handleLoginRequest()
         } else {
             setNotificationPlacement('top')
-            console.log(useUIStore().notificationPlacement)
             errors.forEach((item) =>
                 item.forEach((error) => {
                     notification.error({ title: error.message, duration: 3000 })
