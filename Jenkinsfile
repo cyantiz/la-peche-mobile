@@ -1,5 +1,5 @@
 String DOCKER_REGISTRY="registry.hub.docker.com"
-String DOCKER_REPOSITORY="psycholog1st/la-peche-api"
+String DOCKER_REPOSITORY="psycholog1st/la-peche-fe"
 String DOCKER_IMAGE="${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}"
 
 pipeline {
