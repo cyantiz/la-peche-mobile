@@ -58,8 +58,7 @@ jobs:
             - run:
                   name: Trigger deploy with Jenkins
                   command: |
-                      curl -X POST $JENKINS_URL/generic-webhook-trigger/invoke?token=app-build \
-                        -d '{"image_version\: "0.1.$CIRCLE_BUILD_NUM"}' -H 'Content-Type: application/json'
+                      curl -X POST $JENKINS_URL/generic-webhook-trigger/invoke?token=app-build -d '{"image_version": "0.1.$CIRCLE_BUILD_NUM"}' -H 'Content-Type: application/json'
 
 
 workflows:
