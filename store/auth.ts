@@ -28,10 +28,14 @@ export const useAuthStore = defineStore({
             const refreshToken = useCookie('refresh_token').value
             if (!refreshToken) return false
 
-            const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
+            try {
+                const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
 
-            if (!refreshTokenPayload) return false
-            if (refreshTokenPayload.exp * 1000 < Date.now()) return false
+                if (!refreshTokenPayload) return false
+                if (refreshTokenPayload.exp * 1000 < Date.now()) return false
+            } catch (error) {
+                return false
+            }
 
             return this.access_token !== ''
         },
@@ -98,14 +102,16 @@ export const useAuthStore = defineStore({
             try {
                 await this.refreshToken()
             } catch (err) {
+                console.log('err in init auth')
                 this.logout()
             }
             this.loading = false
 
             // set interval to refresh token
-            setInterval(() => {
-                this.refreshToken()
-            }, 1000 * 30 * 60)
+            // setInterval(() => {
+            //     console.log('interval refresh token')
+            //     this.refreshToken()
+            // }, 1000 * 30 * 60)
         },
 
         async register(formData: RegisterRequestBody) {
@@ -127,9 +133,11 @@ export const useAuthStore = defineStore({
         },
 
         logout() {
+            console.log('process client: ', process.client)
+            console.log('process server: ', process.server)
             useCookie('refresh_token', {
                 sameSite: 'strict',
-            }).value = ''
+            }).value = null
             if (process.client) {
                 location.replace('/auth/login')
             }

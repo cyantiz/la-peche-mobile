@@ -1,5 +1,6 @@
 @import url('tailwind.css');
-html {
-    @apply text-raisin-black;
-    font-family: 'Roboto', sans-serif;
+html,
+body {
+  @apply text-raisin-black;
+  font-family: 'Roboto', sans-serif !important;
 }

@@ -2,76 +2,54 @@ import { Role } from './enums/Role'
 
 declare global {
     interface User {
-        id: number
-        username: string
-        cluster: number
-        isActivated: boolean
-        isDeleted: boolean
-        verifyAt: Date
-        premiumEndsAt: Date
-        createdAt: Date
-        updatedAt: Date
-        lastOnline: Date
-        role: Role
-        name: string
-        gender: string
-        status: string
-        orientation: string
-        biographic: string
-        email: string
-        phoneNumber: string
-        yearOfBirth: number
-        bodyType: string
-        diet: string
-        drinks: string
-        drugs: string
-        education: string
-        ethnicity: string
-        height: string
-        income: number
-        job: string
-        location: string
-        offspring: string
-        pets: string
-        sign: string
-        smokes: string
-        speaks: string
+        id: number | null
+        username: string | null
+        cluster: number | null
+        isActivated: boolean | null
+        isDeleted: boolean | null
+        verifyAt: Date | null
+        premiumEndsAt: Date | null
+        createdAt: Date | null
+        updatedAt: Date | null
+        lastOnline: Date | null
+        role: Role | null
+        name: string | null
+        gender: string | null
+        status: string | null
+        orientation: string | null
+        biographic: string | null
+        email: string | null
+        phoneNumber: string | null
+        yearOfBirth: number | null
+        bodyType: string | null
+        diet: string | null
+        drinks: string | null
+        drugs: string | null
+        education: string | null
+        ethnicity: string | null
+        height: number | null
+        income: number | null
+        job: string | null
+        location: string | null
+        offspring: string | null
+        pets: string | null
+        sign: string | null
+        smokes: string | null
+        speaks: string | null
     }
 
-    interface UserInformation {
-        id: number
-        username: string
-        cluster: number
-        isActivated: true
-        isDeleted: true
-        verifyAt: Date
-        premiumEndsAt: Date
-        createdAt: Date
-        updatedAt: Date
-        lastOnline: Date
-        role: string
-        name: string
-        gender: string
-        status: string
-        orientation: string
-        biographic: string
-        email: string
-        phoneNumber: string
-        yearOfBirth: number
-        bodyType: string
-        diet: string
-        drinks: string
-        drugs: string
-        education: string
-        ethnicity: string
-        height: number
-        income: number
-        job: string
-        location: string
-        offspring: string
-        pets: string
-        sign: string
-        smokes: string
-        speaks: string
-    }
+    type UserInformation = Omit<
+        User,
+        | 'id'
+        | 'username'
+        | 'cluster'
+        | 'isActivated'
+        | 'isDeleted'
+        | 'verifyAt'
+        | 'premiumEndsAt'
+        | 'createdAt'
+        | 'updatedAt'
+        | 'lastOnline'
+        | 'role'
+    >
 }
