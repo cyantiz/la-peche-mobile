@@ -51,7 +51,7 @@ const textSize = computed(() => TEXT_SIZES[props.size])
         :style="{ gap: `${gap}px` }"
     >
         <img
-            src="~/assets/img/logo256.png"
+            src="/img/logo256.png"
             alt=""
             class="object-cover"
             :style="{ width: `${imgSize}px`, height: `${imgSize}px` }"

@@ -7,7 +7,7 @@ interface Props extends AvatarProps {}
 const props = defineProps<Props>()
 
 const src = computed(() => {
-    return props.src ?? '/_nuxt/assets/img/default_avatar.png'
+    return props.src ?? '/img/default_avatar.png'
 })
 </script>
 

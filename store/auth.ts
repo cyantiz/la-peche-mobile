@@ -102,16 +102,9 @@ export const useAuthStore = defineStore({
             try {
                 await this.refreshToken()
             } catch (err) {
-                console.log('err in init auth')
                 this.logout()
             }
             this.loading = false
-
-            // set interval to refresh token
-            // setInterval(() => {
-            //     console.log('interval refresh token')
-            //     this.refreshToken()
-            // }, 1000 * 30 * 60)
         },
 
         async register(formData: RegisterRequestBody) {
@@ -133,8 +126,6 @@ export const useAuthStore = defineStore({
         },
 
         logout() {
-            console.log('process client: ', process.client)
-            console.log('process server: ', process.server)
             useCookie('refresh_token', {
                 sameSite: 'strict',
             }).value = null

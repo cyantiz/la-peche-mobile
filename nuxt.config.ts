@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from 'path'
-import { NuxtConfig } from '@nuxt/types'
+import { defineNuxtConfig } from 'nuxt/config'
 
-const config: NuxtConfig = {
+export default defineNuxtConfig({
     ssr: true,
 
     modules: [
@@ -45,7 +45,6 @@ const config: NuxtConfig = {
     },
 
     app: {
-        __buildAssetsURL: '/_nuxt/',
         head: {
             meta: [{ name: 'naive-ui-style' }, { name: 'vueuc-style' }],
             link: [
@@ -65,7 +64,7 @@ const config: NuxtConfig = {
                 {
                     rel: 'icon',
                     type: 'image/x-icon',
-                    href: '/_nuxt/assets/favicon.ico',
+                    href: '/favicon.ico',
                 },
             ],
         },
@@ -84,14 +83,18 @@ const config: NuxtConfig = {
                 : ['@juggle/resize-observer'],
     },
 
-    vite: {
-        optimizeDeps: {
-            include:
-                process.env.NODE_ENV === 'development'
-                    ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
-                    : [],
+    runtimeConfig: {
+        public: {
+            apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
         },
     },
-}
 
-export default config
+    // vite: {
+    // optimizeDeps: {
+    //     include:
+    //         process.env.NODE_ENV === 'development'
+    //             ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
+    //             : [],
+    // },
+    // },
+})
