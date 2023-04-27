@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PhPencilSimple } from 'phosphor-vue'
-import BaseModal from './BaseModal.vue'
+import BaseModalDialog from './BaseModalDialog.vue'
 defineProps<{
     title: string
     informationRecords: {
@@ -29,7 +29,7 @@ const closeModal = () => {
             <PhPencilSimple
                 :size="24"
                 weight="fill"
-                class="profile__section__header__edit-btn cursor-pointer text-bitter-sweet hover:scale-105"
+                class="cursor-pointer text-bitter-sweet hover:scale-105"
                 @click="() => openModal()"
             />
         </div>
@@ -52,14 +52,14 @@ const closeModal = () => {
                 </template>
             </InformationItem>
         </div>
-        <BaseModal
+        <BaseModalDialog
             :title="title"
             :show="isModalOpen"
             @close="closeModal"
             @negative-click="closeModal"
         >
             <slot name="modal-content" />
-        </BaseModal>
+        </BaseModalDialog>
     </div>
 </template>
 

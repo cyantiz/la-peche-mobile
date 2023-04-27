@@ -57,7 +57,7 @@ const informationRecords = [
         title="Basics information"
         :information-records="informationRecords"
     >
-        <template #modal-content> Chỗ này cho cái form vào nè </template>
+        <template #modal-content> Edit form cho basic information </template>
     </BaseProfileSection>
 </template>
 

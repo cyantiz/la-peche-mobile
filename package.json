@@ -1,9 +1,11 @@
 {
+    "name": "la-peche",
+    "version": "0.0.1",
     "private": true,
     "scripts": {
-        "build": "nuxt build",
-        "dev": "nuxt dev --port 5173",
-        "generate": "nuxt generate",
+        "build": "ENV=dev nuxt build",
+        "dev": "ENV=dev nuxt dev --port 5173",
+        "generate": "env=dev nuxt generate",
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
         "lint": "eslint . --ext .ts,.vue",
@@ -33,6 +35,7 @@
     "dependencies": {
         "@css-render/vue3-ssr": "^0.15.12",
         "@nuxt/types": "^2.16.3",
+        "@nuxtjs/sentry": "^7.2.2",
         "@pinia/nuxt": "^0.4.6",
         "jwt-decode": "^3.1.2",
         "naive-ui": "^2.34.3",
