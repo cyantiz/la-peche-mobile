@@ -19,6 +19,14 @@ export default defineNuxtConfig({
                 ],
             },
         ],
+        // [
+        //     '@nuxtjs/sentry',
+        //     {
+        //         /*
+        //          * Sentry module configuration
+        //          */
+        //     },
+        // ],
     ],
 
     css: ['@/assets/css/main.less'],
@@ -86,6 +94,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+            ENV: process.env.ENV,
         },
     },
 

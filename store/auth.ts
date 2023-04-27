@@ -62,7 +62,11 @@ export const useAuthStore = defineStore({
 
         async refreshToken() {
             try {
+                alert('before get refresh token from cookie')
+
                 const refreshToken = useCookie('refresh_token').value
+
+                alert(refreshToken)
 
                 if (!refreshToken) return
 
