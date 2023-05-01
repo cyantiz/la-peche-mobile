@@ -8,10 +8,10 @@
             <ClientOnly>
                 <NLayoutSider
                     v-if="!isMobile"
-                    bordered
+                    :bordered="false"
                     collapse-mode="width"
-                    :collapsed-width="64"
-                    :width="240"
+                    :collapsed-width="104"
+                    :width="274"
                     :collapsed="isCollapsedSidebar"
                 >
                     <SidebarMenu :collapsed="isCollapsedSidebar" />

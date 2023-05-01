@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import { NDivider } from 'naive-ui'
+
 withDefaults(
     defineProps<{
         title: string
         content?: number | string | null | undefined
         block?: boolean
+        bottomDivider: boolean
     }>(),
     {
         block: false,
         content: '',
+        bottomDivider: true,
     }
 )
 defineEmits(['addButtonClick'])
@@ -15,26 +19,33 @@ defineEmits(['addButtonClick'])
 
 <template>
     <div
-        class="inline-flex items-center border-[0.5px] border-solid border-inactive px-3 py-[6px]"
+        class="inline-flex items-center px-3 py-[6px]"
         :class="{ 'w-full ': block }"
     >
         <div
-            class="inline-flex w-[170px] items-center gap-2"
+            class="inline-flex w-[160px] items-center gap-2"
             :class="{ 'w-full': block }"
         >
             <slot name="icon" :size="18" color="black" />
             <span class="font-bold">{{ title }}</span>
         </div>
-        <span v-if="content" class="text-md w-[180px] text-right font-medium">{{
-            content
-        }}</span>
-        <span
+        <div v-if="content" class="text-md w-[240px] text-right font-medium">
+            {{ content }}
+        </div>
+        <div
             v-else
-            class="text-md text-md w-[180px] cursor-pointer text-right font-bold text-inactive"
-            @click="$emit('addButtonClick')"
-            >Add</span
+            class="text-md text-md w-[240px] text-right font-bold text-inactive"
         >
+            <span class="cursor-pointer" @click="$emit('addButtonClick')">
+                Add
+            </span>
+        </div>
     </div>
+    <NDivider v-show="bottomDivider" />
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.n-divider {
+    margin-block: 0.25rem !important;
+}
+</style>

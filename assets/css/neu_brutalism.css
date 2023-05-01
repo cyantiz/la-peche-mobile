@@ -1,4 +1,3 @@
-@import url('tailwind.css');
 .neu-border-2 {
   @apply border-black border-2 border-solid;
 }
@@ -26,22 +25,4 @@
 }
 .neu-shadow-rt-4 {
   box-shadow: 4px -4px 0px 0px black;
-}
-html,
-body {
-  @apply text-raisin-black;
-  font-family: 'Roboto', sans-serif !important;
-}
-.n-modal.n-dialog {
-  @apply border-black border-4 border-solid;
-  box-shadow: 4px -4px 0px 0px black;
-}
-.n-button {
-  transition: all ease 0.2s;
-  box-shadow: 2px -2px 0px 0px black;
-}
-.n-button:active,
-.n-button:focus {
-  box-shadow: none;
-  transform: translate(2px, -2px);
 }

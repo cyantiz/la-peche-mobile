@@ -2,6 +2,7 @@
 import { useLoadingBar } from 'naive-ui'
 import { useAuthStore } from '@/store/auth'
 import BasicSection from '@/components/page_organism/profile/sections/Basic.vue'
+import RelationShipGoalSection from '@/components/page_organism/profile/sections/RelationshipGoal.vue'
 defineProps<{}>()
 
 const { user } = useAuthStore()
@@ -34,15 +35,23 @@ onMounted(() => {
 
     <div v-else>
         <p>{{ data }}</p>
+        <div
+            class="profile-sections my-2 flex w-full flex-col items-center justify-center gap-4"
+        >
+            <BasicSection
+                :name="data.name"
+                :gender="data.gender"
+                :year-of-birth="data.yearOfBirth"
+                :height="data.height"
+                :location="data.location"
+                :ethnicity="data.ethnicity"
+            ></BasicSection>
 
-        <BasicSection
-            :name="data.name"
-            :gender="data.gender"
-            :year-of-birth="data.yearOfBirth"
-            :height="data.height"
-            :location="data.location"
-            :ethnicity="data.ethnicity"
-        ></BasicSection>
+            <RelationShipGoalSection
+                :orientation="data.orientation"
+                :relationship-goal="'Long-term partner'"
+            ></RelationShipGoalSection>
+        </div>
     </div>
 </template>
 

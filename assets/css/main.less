@@ -1,5 +1,7 @@
 @import url('./tailwind.css');
 
+@import url('./neu_brutalism.less');
+
 html,
 body {
     @apply text-raisin-black;
@@ -14,3 +16,22 @@ body {
 @color-gold-metallic: #ddb967;
 @color-yellow-green-crayola: #d0e37f;
 @color-almost-white: #fefefe;
+@color-inactive: #A8AAB9;
+
+
+.n-modal.n-dialog {
+    .neu-border-4;
+    .neu-shadow-rt-4;
+}
+
+.n-button {
+    transition: all ease .2s;
+
+    .neu-shadow-rt-2;
+
+    &:active,
+    &:focus {
+        box-shadow: none;
+        transform: translate(2px, -2px);
+    }
+}

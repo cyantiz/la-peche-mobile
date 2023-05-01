@@ -7,7 +7,7 @@ import {
     PhRuler,
     PhUsersThree,
 } from 'phosphor-vue'
-import BaseProfileSection from './base/BaseProfileSection.vue'
+import BaseProfileSectionTable from './base/BaseProfileSectionTable.vue'
 const props = defineProps<{
     // no using Pick from UserInformation type because of Vue issue (fixed in 3.3.0 but using 3.2.47 now)
     name: string | null
@@ -53,12 +53,12 @@ const informationRecords = [
 </script>
 
 <template>
-    <BaseProfileSection
+    <BaseProfileSectionTable
         title="Basics information"
         :information-records="informationRecords"
     >
         <template #modal-content> Edit form cho basic information </template>
-    </BaseProfileSection>
+    </BaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>

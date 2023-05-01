@@ -3,11 +3,6 @@ import { PhPencilSimple } from 'phosphor-vue'
 import BaseModalDialog from './BaseModalDialog.vue'
 defineProps<{
     title: string
-    informationRecords: {
-        title: string
-        content: string | number | null
-        iconComponent: any // add `any` here because of framework complex type
-    }[]
 }>()
 const isModalOpen = ref(false)
 
@@ -34,23 +29,9 @@ const closeModal = () => {
             />
         </div>
         <div
-            class="profile__section__items inline-flex flex-col items-center border-[0.5px] border-solid border-inactive"
+            class="profile__section__content inline-flex flex-col items-center border-[0.5px] border-solid border-inactive"
         >
-            <InformationItem
-                v-for="information in informationRecords"
-                :key="information.title"
-                :title="information.title"
-                :content="information.content"
-                @add-button-click="openModal"
-            >
-                <template #icon="{ size }">
-                    <component
-                        :is="information.iconComponent"
-                        :size="size"
-                        weight="bold"
-                    />
-                </template>
-            </InformationItem>
+            <slot name="profile-content" />
         </div>
         <BaseModalDialog
             :title="title"
