@@ -84,7 +84,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="space-between flex flex-col">
+    <div
+        class="space-between neu-border-2 neu-shadow-rt-4 flex flex-col rounded-xl px-4 py-12"
+    >
         <div>
             <div class="quote mb-6 flex flex-col gap-2">
                 <div class="text-4xl font-bold">

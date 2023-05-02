@@ -21,7 +21,7 @@ const closeModal = () => {
 
 <template>
     <div
-        class="profile__section neu-border-3 neu-shadow-rt-3 inline-flex flex-col items-center rounded-xl bg-yellow-green-crayola bg-opacity-5 p-3"
+        class="profile__section neu-border-3 neu-shadow-rt-3 inline-flex w-full flex-col items-center rounded-xl bg-yellow-green-crayola bg-opacity-10 p-3"
     >
         <div
             class="profile__section__header mb-4 flex w-full items-center justify-between pl-3"

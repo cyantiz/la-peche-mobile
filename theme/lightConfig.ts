@@ -60,6 +60,7 @@ const themeOverrides: GlobalThemeOverrides = {
     },
     Dialog: {
         borderRadius: '16px',
+        closeColorHover: 'rgba(0, 0, 0, 0)',
     },
 }
 

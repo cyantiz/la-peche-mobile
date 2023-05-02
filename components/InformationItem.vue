@@ -19,7 +19,7 @@ defineEmits(['addButtonClick'])
 
 <template>
     <div
-        class="inline-flex w-[496px] items-center justify-between px-3 py-[6px]"
+        class="inline-flex w-full items-center justify-between px-3 py-[6px]"
         :class="{ 'w-full ': block }"
     >
         <div

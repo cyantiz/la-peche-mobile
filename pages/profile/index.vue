@@ -36,12 +36,14 @@ onMounted(() => {
     </div>
 
     <div v-else>
-        <div class="profile-sections my-2 flex w-full justify-between gap-4">
+        <div
+            class="profile-sections flex w-full flex-col justify-between gap-4 lg:flex-row"
+        >
             <div class="w-full">
                 <BiographicSection :biographic="data.biographic" />
             </div>
 
-            <div class="flex flex-col items-center gap-4">
+            <div class="flex w-full flex-col items-center gap-4">
                 <BasicSection
                     :name="data.name"
                     :gender="data.gender"

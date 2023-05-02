@@ -87,7 +87,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="space-between flex flex-col">
+    <div
+        class="space-between neu-border-2 neu-shadow-rt-4 flex flex-col rounded-xl px-4 py-12"
+    >
         <div>
             <div class="mb-6 text-4xl font-bold">Welcome back!</div>
             <NForm

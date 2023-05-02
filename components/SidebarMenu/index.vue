@@ -77,13 +77,13 @@ function expandIcon() {
 </script>
 
 <template>
-    <div class="flex h-full flex-col p-4">
+    <div class="flex h-full flex-col p-4 pr-0">
         <div
-            class="neu-border-4 neu-shadow-lb-4 flex flex-col gap-8 rounded-2xl pt-4"
+            class="neu-border-2 neu-shadow-lb-4 flex flex-col gap-8 rounded-2xl bg-yellow-green-crayola bg-opacity-10 pt-4"
         >
             <div class="info flex w-full flex-col items-center gap-3">
                 <div
-                    class="neu-border-3 neu-shadow-lb-3 flex overflow-hidden rounded-xl"
+                    class="neu-border-2 neu-shadow-lb-3 flex overflow-hidden rounded-xl"
                 >
                     <Avatar :size="collapsed ? 40 : 192" />
                 </div>
