@@ -8,17 +8,21 @@
             <ClientOnly>
                 <NLayoutSider
                     v-if="!isMobile"
-                    bordered
+                    :bordered="false"
                     collapse-mode="width"
-                    :collapsed-width="64"
-                    :width="240"
+                    :collapsed-width="84"
+                    :width="258"
                     :collapsed="isCollapsedSidebar"
                 >
                     <SidebarMenu :collapsed="isCollapsedSidebar" />
                 </NLayoutSider>
             </ClientOnly>
-            <NLayout class="w-full" content-style="width: 100%; padding: 1rem">
-                <slot />
+            <NLayout class="w-full" content-style="width: 100%; padding: 1rem;">
+                <div
+                    class="neu-shadow-lb-4 neu-border-2 h-full w-full overflow-y-scroll rounded-2xl p-4"
+                >
+                    <slot />
+                </div>
             </NLayout>
         </NLayout>
     </div>
@@ -27,6 +31,7 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from '@vueuse/core'
 import { NLayoutSider, NLayout, useLoadingBar } from 'naive-ui'
+import { COLLAPSED_SIDEBAR_PAGES } from './config'
 import SidebarMenu from '@/components/SidebarMenu/index.vue'
 import { useAuthStore } from '~/store/auth'
 
@@ -41,7 +46,6 @@ const isShowLayoutCurtain = ref<boolean>(true)
 
 const breakPoints = useBreakpoints(breakpointsTailwind)
 // handle dynamic styling for sidebar
-const COLLAPSED_SIDEBAR_PAGES = ['messages']
 
 const isCollapsedSidebar = computed(
     () =>
@@ -71,9 +75,9 @@ router.beforeEach(() => {
 </script>
 
 <style lang="less" scoped>
-@navbar-height-desktop: 48px;
-@navbar-height-mobile: 100px;
-@breakpoint-mobile: 640px;
+@navbar-height-desktop: 72px;
+@navbar-height-mobile: 116px;
+@breakpoint-mobile: 726px;
 div.body {
     height: calc(100vh - @navbar-height-desktop);
 }

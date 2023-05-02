@@ -8,4 +8,7 @@ export enum Color {
     GoldMetallic = '#DDB967',
     YellowGreenCrayola = '#D0E37F',
     AlmostWhite = '#FEFEFE',
+    Cherry = '#CA1919',
+    Inactive = '#A8AAB9',
+    Ocean = '#63B9DB',
 }

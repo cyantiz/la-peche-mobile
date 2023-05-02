@@ -1,4 +1,6 @@
 @import url('./tailwind.css');
+@import url('./colors.less');
+@import url('./neu_brutalism.less');
 
 html,
 body {
@@ -6,11 +8,38 @@ body {
     font-family: 'Roboto', sans-serif !important;
 }
 
-@color-raisin-black: #221d23;
-@color-cafe-noir: #4f3824;
-@color-bittersweet: #fb7b64;
-@color-bittersweet-hover: #ff9a7d;
-@color-bittersweet-pressed: #c86250;
-@color-gold-metallic: #ddb967;
-@color-yellow-green-crayola: #d0e37f;
-@color-almost-white: #fefefe;
+
+.n-modal.n-dialog {
+    .neu-border-4;
+    .neu-shadow-rt-4;
+}
+
+.n-button {
+    transition: all ease .2s;
+
+    .neu-shadow-rt-2;
+
+    &:active,
+    &:focus,
+    &:hover {
+        box-shadow: none;
+        transform: translate(2px, -2px);
+    }
+}
+
+.n-input {
+    transition: all ease .3s;
+
+    &--focus {
+        transform: translate(-2px, 2px);
+    }
+
+    .n-input__border,
+    .n-input__state-border {
+        transition: all ease .3s;
+    }
+}
+
+.n-alert {
+    .neu-shadow-rt-2-ocean;
+}

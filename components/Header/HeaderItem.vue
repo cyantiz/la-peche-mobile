@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(
     defineProps<{
-        size: 'small' | 'medium'
+        size: 'tiny' | 'small' | 'medium'
         shape: 'circle' | 'rounded-square'
     }>(),
     {
@@ -14,6 +14,9 @@ const classes = computed(() => {
     let size = ''
     let shape = ''
     switch (props.size) {
+        case 'tiny':
+            size = 'p-[5px]'
+            break
         case 'small':
             size = 'p-[10px]'
             break
@@ -27,15 +30,27 @@ const classes = computed(() => {
             shape = 'rounded-full'
             break
         case 'rounded-square':
-            shape = 'rounded-lg'
+            switch (props.size) {
+                case 'tiny':
+                    shape = 'rounded'
+                    break
+                case 'small':
+                    shape = 'rounded-md'
+                    break
+                case 'medium':
+                    shape = 'rounded-xl'
+                    break
+            }
             break
     }
 
-    return `cursor-pointer bg-[#E4E6EB] hover:bg-[#D8DADF] flex items-center justify-center ${size} ${shape}`
+    return `cursor-pointer bg-white hover:bg-yellow-green-crayola hover:bg-opacity-10 neu-border-2 neu-shadow-lb-2 hover:neu-shadow-0 hover:-translate-x-[1px] hover:translate-y-[1px] transition-all duration-200 flex items-center justify-center ${size} ${shape}`
 })
 
 const iconSize = computed(() => {
     switch (props.size) {
+        case 'tiny':
+            return 16
         case 'small':
             return 20
         case 'medium':

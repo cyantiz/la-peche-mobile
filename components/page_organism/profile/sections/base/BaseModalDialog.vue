@@ -15,6 +15,8 @@ defineEmits(['close', 'negativeClick', 'positiveClick'])
         preset="dialog"
         positive-text="Save"
         negative-text="Cancel"
+        :negative-button-props="{ size: 'medium' }"
+        :positive-button-props="{ size: 'medium' }"
         @positive-click="$emit('positiveClick')"
         @negative-click="$emit('negativeClick')"
         @mask-click="$emit('close')"

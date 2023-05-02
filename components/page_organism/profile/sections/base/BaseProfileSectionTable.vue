@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import { PhPencilSimple } from 'phosphor-vue'
 import BaseModalDialog from './BaseModalDialog.vue'
-
-withDefaults(
-    defineProps<{
+defineProps<{
+    title: string
+    informationRecords: {
         title: string
-        block?: boolean
-        haveEditModal?: boolean
-    }>(),
-    {
-        block: false,
-        haveEditModal: true,
-    }
-)
+        content: string | number | null
+        iconComponent: any // add `any` here because of framework complex type
+    }[]
+}>()
 const isModalOpen = ref(false)
 
 const openModal = () => {
@@ -25,8 +21,7 @@ const closeModal = () => {
 
 <template>
     <div
-        class="profile__section neu-border-3 neu-shadow-rt-3 inline-flex flex-col items-center rounded-xl bg-yellow-green-crayola bg-opacity-10 p-3"
-        :class="{ 'w-full': block }"
+        class="profile__section neu-border-3 neu-shadow-rt-3 inline-flex w-full flex-col items-center rounded-xl bg-yellow-green-crayola bg-opacity-10 p-3"
     >
         <div
             class="profile__section__header mb-4 flex w-full items-center justify-between pl-3"
@@ -35,7 +30,6 @@ const closeModal = () => {
                 {{ title }}
             </span>
             <PhPencilSimple
-                v-if="haveEditModal"
                 :size="24"
                 weight="fill"
                 class="cursor-pointer text-bitter-sweet transition-all hover:scale-110"
@@ -43,12 +37,24 @@ const closeModal = () => {
             />
         </div>
 
-        <div class="profile__section__content w-full">
-            <slot name="content" />
-        </div>
+        <InformationItem
+            v-for="(information, index) in informationRecords"
+            :key="information.title"
+            :title="information.title"
+            :content="information.content"
+            :bottom-divider="index !== informationRecords.length - 1"
+            @add-button-click="openModal"
+        >
+            <template #icon="{ size }">
+                <component
+                    :is="information.iconComponent"
+                    :size="size"
+                    weight="bold"
+                />
+            </template>
+        </InformationItem>
     </div>
     <BaseModalDialog
-        v-if="haveEditModal"
         :title="title"
         :show="isModalOpen"
         @close="closeModal"

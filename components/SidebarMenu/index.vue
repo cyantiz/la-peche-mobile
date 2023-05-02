@@ -7,6 +7,7 @@ import {
     PhStar,
     PhUser,
 } from 'phosphor-vue'
+import { useAuthStore } from '~/store/auth'
 
 const props = withDefaults(
     defineProps<{
@@ -18,6 +19,8 @@ const props = withDefaults(
 )
 
 const router = useRouter()
+
+const auth = useAuthStore()
 
 const menuOptions: MenuOption[] = [
     {
@@ -74,54 +77,77 @@ function expandIcon() {
 </script>
 
 <template>
-    <div class="flex flex-col gap-8 pt-8">
-        <div class="info flex w-full flex-col items-center gap-3">
-            <Avatar :size="collapsed ? 40 : 192" />
-            <div v-if="!collapsed" class="text">
-                <div class="w-48 text-lg font-bold">Kurt Cobain</div>
-                <div>Seattle, WA, United States</div>
-            </div>
-            <div v-if="!collapsed" class="statistic flex w-48 gap-3">
-                <div class="like flex-1">
-                    <div
-                        class="number text-base font-semibold text-bitter-sweet"
-                    >
-                        888
-                    </div>
-                    <div class="font-medium text-inactive">Likes</div>
+    <div class="flex h-full flex-col p-4 pr-0">
+        <div
+            class="neu-border-2 neu-shadow-lb-4 flex flex-col gap-8 rounded-2xl bg-yellow-green-crayola bg-opacity-10 pt-4"
+        >
+            <div class="info flex w-full flex-col items-center gap-3">
+                <div
+                    class="neu-border-2 neu-shadow-lb-3 flex overflow-hidden rounded-xl"
+                >
+                    <Avatar :size="collapsed ? 40 : 192" />
                 </div>
-                <div class="matches flex-1">
-                    <div
-                        class="number text-base font-semibold text-bitter-sweet"
-                    >
-                        88
+                <div v-if="!collapsed" class="text">
+                    <div class="w-48 text-lg font-bold">
+                        {{ auth.user.name }}
                     </div>
-                    <div class="font-medium text-inactive">Matches</div>
+                    <div>@{{ auth.user.username }}</div>
+                </div>
+                <div v-if="!collapsed" class="statistic flex w-48 gap-3">
+                    <div class="statistic__likes flex-1">
+                        <div class="text-base font-semibold text-bitter-sweet">
+                            888
+                        </div>
+                        <div class="font-medium text-inactive">Likes</div>
+                    </div>
+                    <div class="statistic__matches flex-1">
+                        <div class="text-base font-semibold text-bitter-sweet">
+                            88
+                        </div>
+                        <div class="font-medium text-inactive">Matches</div>
+                    </div>
                 </div>
             </div>
+            <NMenu
+                :collapsed="props.collapsed"
+                :options="menuOptions"
+                :expand-icon="expandIcon"
+                :render-label="renderLabel"
+                :on-update-value="onItemSelect"
+                :value="$route.name?.toString()"
+                :icon-size="24"
+                :collapsed-icon-size="24"
+                :collapsed-width="64"
+            />
         </div>
-        <NMenu
-            :collapsed="props.collapsed"
-            :options="menuOptions"
-            :expand-icon="expandIcon"
-            :render-label="renderLabel"
-            :on-update-value="onItemSelect"
-            :value="$route.name?.toString()"
-            :icon-size="24"
-            :collapsed-icon-size="24"
-            :collapsed-width="64"
-        />
     </div>
 </template>
 
 <style lang="less">
+@import url('~/assets/css/neu_brutalism.less');
+
 .n-menu .n-menu-item-content .n-menu-item-content-header a {
     @apply font-medium;
 }
 .n-menu-item-content__icon {
     margin-right: 16px !important;
 }
-.n-menu .n-menu-item-content .n-menu-item-content__icon {
-    @apply text-inactive;
+
+.n-menu .n-menu-item-content {
+    transition: all ease-in-out 0.2s;
+
+    &::before {
+        .neu-border-2;
+        transition: all ease-in-out 0.2s;
+    }
+
+    &:not(&--selected):hover,
+    &--selected {
+        &::before {
+            .neu-shadow-lb-2;
+            transform: translateX(1px) translateY(-1px);
+        }
+        transform: translateX(1px) translateY(-1px);
+    }
 }
 </style>
