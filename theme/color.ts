@@ -10,4 +10,5 @@ export enum Color {
     AlmostWhite = '#FEFEFE',
     Cherry = '#CA1919',
     Inactive = '#A8AAB9',
+    Ocean = '#63B9DB',
 }

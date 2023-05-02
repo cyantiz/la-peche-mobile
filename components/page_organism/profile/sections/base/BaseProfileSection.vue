@@ -6,9 +6,11 @@ withDefaults(
     defineProps<{
         title: string
         block?: boolean
+        haveEditModal?: boolean
     }>(),
     {
         block: false,
+        haveEditModal: true,
     }
 )
 const isModalOpen = ref(false)
@@ -33,6 +35,7 @@ const closeModal = () => {
                 {{ title }}
             </span>
             <PhPencilSimple
+                v-if="haveEditModal"
                 :size="24"
                 weight="fill"
                 class="cursor-pointer text-bitter-sweet transition-all hover:scale-110"
@@ -40,11 +43,12 @@ const closeModal = () => {
             />
         </div>
 
-        <div class="profile__section__content">
+        <div class="profile__section__content w-full">
             <slot name="content" />
         </div>
     </div>
     <BaseModalDialog
+        v-if="haveEditModal"
         :title="title"
         :show="isModalOpen"
         @close="closeModal"

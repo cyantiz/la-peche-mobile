@@ -8,7 +8,7 @@ defineProps<{
 <template>
     <BaseProfileSection block title="Biographic">
         <template #content>
-            <p class="text-base">{{ biographic }}</p>
+            <p class="text-center text-base">{{ biographic }}</p>
         </template>
         <template #modal-content> Edit form for biographic </template>
     </BaseProfileSection>

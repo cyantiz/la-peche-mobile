@@ -6,6 +6,7 @@ import RelationShipGoalSection from '@/components/page_organism/profile/sections
 import JobAndEducationSection from '@/components/page_organism/profile/sections/JobAndEducation.vue'
 import AdditionalInfoSection from '@/components/page_organism/profile/sections/AdditionalInfo.vue'
 import BiographicSection from '@/components/page_organism/profile/sections/Biographic.vue'
+import ImagesSection from '@/components/page_organism/profile/sections/Images/index.vue'
 defineProps<{}>()
 
 const { user } = useAuthStore()
@@ -39,8 +40,9 @@ onMounted(() => {
         <div
             class="profile-sections flex w-full flex-col justify-between gap-4 lg:flex-row"
         >
-            <div class="w-full">
+            <div class="flex w-full flex-col items-center gap-4">
                 <BiographicSection :biographic="data.biographic" />
+                <ImagesSection />
             </div>
 
             <div class="flex w-full flex-col items-center gap-4">

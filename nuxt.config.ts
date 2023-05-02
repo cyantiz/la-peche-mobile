@@ -29,7 +29,11 @@ export default defineNuxtConfig({
         // ],
     ],
 
-    css: ['@/assets/css/main.less'],
+    css: [
+        '@/assets/css/main.less',
+        '@/assets/css/colors.less',
+        '@/assets/css/neu_brutalism.less',
+    ],
 
     postcss: {
         plugins: {

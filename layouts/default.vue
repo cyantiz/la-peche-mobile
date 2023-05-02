@@ -31,6 +31,7 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from '@vueuse/core'
 import { NLayoutSider, NLayout, useLoadingBar } from 'naive-ui'
+import { COLLAPSED_SIDEBAR_PAGES } from './config'
 import SidebarMenu from '@/components/SidebarMenu/index.vue'
 import { useAuthStore } from '~/store/auth'
 
@@ -45,7 +46,6 @@ const isShowLayoutCurtain = ref<boolean>(true)
 
 const breakPoints = useBreakpoints(breakpointsTailwind)
 // handle dynamic styling for sidebar
-const COLLAPSED_SIDEBAR_PAGES = ['messages']
 
 const isCollapsedSidebar = computed(
     () =>

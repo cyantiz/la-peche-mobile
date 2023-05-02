@@ -14,7 +14,7 @@ const isMobile = breakPoints.smallerOrEqual('md')
         >
             <div class="flex h-full w-full justify-between">
                 <Logo size="sm" is-with-text />
-                <div v-if="!isMobile" class="navbar-right--desktop flex gap-9">
+                <div v-if="!isMobile" class="header-right--desktop flex gap-9">
                     <div class="flex gap-4">
                         <HeaderItem size="small" shape="rounded-square">
                             <template #icon="{ size, color }">
@@ -45,7 +45,7 @@ const isMobile = breakPoints.smallerOrEqual('md')
                         />
                     </div>
                 </div>
-                <div v-if="isMobile" class="navbar-right--mobile">
+                <div v-if="isMobile" class="header-right--mobile">
                     <HeaderItem
                         size="tiny"
                         shape="rounded-square"
