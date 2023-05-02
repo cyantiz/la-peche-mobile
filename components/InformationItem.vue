@@ -19,17 +19,17 @@ defineEmits(['addButtonClick'])
 
 <template>
     <div
-        class="inline-flex items-center px-3 py-[6px]"
+        class="inline-flex w-[496px] items-center justify-between px-3 py-[6px]"
         :class="{ 'w-full ': block }"
     >
         <div
-            class="inline-flex w-[160px] items-center gap-2"
+            class="inline-flex items-center gap-2"
             :class="{ 'w-full': block }"
         >
             <slot name="icon" :size="18" color="black" />
             <span class="font-bold">{{ title }}</span>
         </div>
-        <div v-if="content" class="text-md w-[240px] text-right font-medium">
+        <div v-if="content" class="text-md text-right font-medium">
             {{ content }}
         </div>
         <div
@@ -46,6 +46,6 @@ defineEmits(['addButtonClick'])
 
 <style lang="less" scoped>
 .n-divider {
-    margin-block: 0.25rem !important;
+    margin-block: 0.05rem !important;
 }
 </style>

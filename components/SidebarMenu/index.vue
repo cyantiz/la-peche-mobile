@@ -7,6 +7,7 @@ import {
     PhStar,
     PhUser,
 } from 'phosphor-vue'
+import { useAuthStore } from '~/store/auth'
 
 const props = withDefaults(
     defineProps<{
@@ -18,6 +19,8 @@ const props = withDefaults(
 )
 
 const router = useRouter()
+
+const auth = useAuthStore()
 
 const menuOptions: MenuOption[] = [
     {
@@ -85,22 +88,20 @@ function expandIcon() {
                     <Avatar :size="collapsed ? 40 : 192" />
                 </div>
                 <div v-if="!collapsed" class="text">
-                    <div class="w-48 text-lg font-bold">Kurt Cobain</div>
-                    <div>Seattle, WA, United States</div>
+                    <div class="w-48 text-lg font-bold">
+                        {{ auth.user.name }}
+                    </div>
+                    <div>@{{ auth.user.username }}</div>
                 </div>
                 <div v-if="!collapsed" class="statistic flex w-48 gap-3">
-                    <div class="like flex-1">
-                        <div
-                            class="number text-base font-semibold text-bitter-sweet"
-                        >
+                    <div class="statistic__likes flex-1">
+                        <div class="text-base font-semibold text-bitter-sweet">
                             888
                         </div>
                         <div class="font-medium text-inactive">Likes</div>
                     </div>
-                    <div class="matches flex-1">
-                        <div
-                            class="number text-base font-semibold text-bitter-sweet"
-                        >
+                    <div class="statistic__matches flex-1">
+                        <div class="text-base font-semibold text-bitter-sweet">
                             88
                         </div>
                         <div class="font-medium text-inactive">Matches</div>

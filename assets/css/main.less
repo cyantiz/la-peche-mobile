@@ -16,7 +16,8 @@ body {
 @color-gold-metallic: #ddb967;
 @color-yellow-green-crayola: #d0e37f;
 @color-almost-white: #fefefe;
-@color-inactive: #A8AAB9;
+@color-inactive: #a8aab9;
+@color-cherry: #ca1919;
 
 
 .n-modal.n-dialog {
@@ -33,5 +34,18 @@ body {
     &:focus {
         box-shadow: none;
         transform: translate(2px, -2px);
+    }
+}
+
+.n-input {
+    transition: all ease .3s;
+
+    &--focus {
+        transform: translate(-2px, 2px);
+    }
+
+    .n-input__border,
+    .n-input__state-border {
+        transition: all ease .3s;
     }
 }

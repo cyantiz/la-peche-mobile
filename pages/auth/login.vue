@@ -120,7 +120,7 @@ onMounted(() => {
             <LoginWithGoogleButton @click="loginWithGoogle" />
         </div>
 
-        <div class="mt-12 flex flex-col items-center">
+        <div class="mt-12 flex flex-col items-center gap-1">
             <span> Don't have an account yet? </span>
             <NButton
                 type="success"

@@ -45,3 +45,13 @@ body {
   box-shadow: none;
   transform: translate(2px, -2px);
 }
+.n-input {
+  transition: all ease 0.3s;
+}
+.n-input--focus {
+  transform: translate(-2px, 2px);
+}
+.n-input .n-input__border,
+.n-input .n-input__state-border {
+  transition: all ease 0.3s;
+}

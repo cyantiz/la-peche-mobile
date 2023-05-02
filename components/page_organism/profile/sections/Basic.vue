@@ -54,7 +54,7 @@ const informationRecords = [
 
 <template>
     <BaseProfileSectionTable
-        title="Basics information"
+        title="Basic information"
         :information-records="informationRecords"
     >
         <template #modal-content> Edit form cho basic information </template>

@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { PhPencilSimple } from 'phosphor-vue'
 import BaseModalDialog from './BaseModalDialog.vue'
-defineProps<{
-    title: string
-}>()
+
+withDefaults(
+    defineProps<{
+        title: string
+        block?: boolean
+    }>(),
+    {
+        block: false,
+    }
+)
 const isModalOpen = ref(false)
 
 const openModal = () => {
@@ -15,33 +22,36 @@ const closeModal = () => {
 </script>
 
 <template>
-    <div class="profile__section flex flex-col items-center justify-center">
-        <div class="profile__section__header flex items-center gap-2">
-            <div class="dot h-2 w-2 rounded-full bg-bitter-sweet"></div>
-            <span class="text-2xl font-bold">
+    <div
+        class="'profile__section neu-border-3 neu-shadow-rt-3 inline-flex flex-col items-center rounded-xl bg-yellow-green-crayola bg-opacity-5 p-3"
+        :class="{ 'w-full': block }"
+    >
+        <div
+            class="profile__section__header mb-4 flex w-full items-center justify-between pl-3"
+        >
+            <span class="text-xl font-bold">
                 {{ title }}
             </span>
             <PhPencilSimple
                 :size="24"
                 weight="fill"
-                class="cursor-pointer text-bitter-sweet hover:scale-105"
+                class="cursor-pointer text-bitter-sweet transition-all hover:scale-110"
                 @click="() => openModal()"
             />
         </div>
-        <div
-            class="profile__section__content inline-flex flex-col items-center border-[0.5px] border-solid border-inactive"
-        >
-            <slot name="profile-content" />
+
+        <div class="profile__section__content">
+            <slot name="content" />
         </div>
-        <BaseModalDialog
-            :title="title"
-            :show="isModalOpen"
-            @close="closeModal"
-            @negative-click="closeModal"
-        >
-            <slot name="modal-content" />
-        </BaseModalDialog>
     </div>
+    <BaseModalDialog
+        :title="title"
+        :show="isModalOpen"
+        @close="closeModal"
+        @negative-click="closeModal"
+    >
+        <slot name="modal-content" />
+    </BaseModalDialog>
 </template>
 
 <style lang="less" scoped></style>
