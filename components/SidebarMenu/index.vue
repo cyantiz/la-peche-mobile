@@ -9,7 +9,7 @@ import {
 } from 'phosphor-vue'
 import { useAuthStore } from '~/store/auth'
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         collapsed: boolean
     }>(),
@@ -105,7 +105,7 @@ function expandIcon() {
                 </div>
             </div>
             <NMenu
-                :collapsed="props.collapsed"
+                :collapsed="collapsed"
                 :options="menuOptions"
                 :expand-icon="expandIcon"
                 :render-label="renderLabel"

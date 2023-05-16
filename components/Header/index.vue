@@ -46,7 +46,7 @@ const isMobile = breakPoints.smallerOrEqual('md')
                         <HeaderItemTriggerMenuButton>
                             <template #button>
                                 <div class="flex overflow-hidden">
-                                    <Avatar :size="36" />
+                                    <Avatar :size="40" />
                                 </div>
                             </template>
                             <template #menu>
@@ -78,4 +78,8 @@ const isMobile = breakPoints.smallerOrEqual('md')
     </header>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.custom-shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+</style>

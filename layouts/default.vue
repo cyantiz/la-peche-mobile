@@ -16,11 +16,11 @@
                     collapse-mode="width"
                     :collapsed-width="84"
                     :width="258"
-                    :collapsed="isCollapsedSidebar"
+                    :collapsed="true"
                     class="bg-white bg-opacity-0"
                     content-style="overflow: initial"
                 >
-                    <SidebarMenu :collapsed="isCollapsedSidebar" />
+                    <SidebarMenu :collapsed="true" />
                 </NLayoutSider>
             </ClientOnly>
             <NLayout

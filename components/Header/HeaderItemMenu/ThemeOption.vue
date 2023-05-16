@@ -16,7 +16,7 @@ const cssProps = computed(() => {
 
 <template>
     <div
-        class="theme-option neu-border-2 flex w-32 cursor-pointer flex-col items-center justify-center gap-2 py-2 font-bold transition-all duration-200"
+        class="theme-option neu-border-2 flex w-32 cursor-pointer flex-col items-center justify-center gap-2 rounded-lg py-2 font-bold transition-all duration-200"
         :class="{
             'theme-option--active': active,
             'theme-option--inactive': !active,

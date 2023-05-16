@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NCarousel, NCarouselItem, NIcon } from 'naive-ui'
-import { PhArrowArcLeft, PhArrowArcRight } from 'phosphor-vue'
+import { PhArrowLeft, PhArrowRight } from 'phosphor-vue'
 defineProps<{
     images: Array<{
         id: number
@@ -24,10 +24,10 @@ defineProps<{
         <template #arrow="{ prev, next }">
             <div class="custom-arrow">
                 <button type="button" class="custom-arrow--left" @click="prev">
-                    <NIcon><PhArrowArcLeft /></NIcon>
+                    <NIcon><PhArrowLeft /></NIcon>
                 </button>
                 <button type="button" class="custom-arrow--right" @click="next">
-                    <NIcon><PhArrowArcRight /></NIcon>
+                    <NIcon><PhArrowRight /></NIcon>
                 </button>
             </div>
         </template>

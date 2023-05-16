@@ -14,7 +14,9 @@ const setTheme = (option: ThemeOption) => {
 </script>
 
 <template>
-    <div class="neu-border-2 flex gap-2 bg-white p-4">
+    <div
+        class="custom-shadow flex gap-2 rounded-lg border border-solid border-gray-200 bg-white p-4"
+    >
         <ThemeOptionVue
             :active="theme === ThemeOption.Ocean"
             text="Ocean"
@@ -40,4 +42,8 @@ const setTheme = (option: ThemeOption) => {
     </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.custom-shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+</style>

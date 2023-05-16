@@ -16,7 +16,7 @@ const logout = async () => {
 
 <template>
     <div
-        class="neu-border-2 flex min-w-[192px] flex-col items-start bg-white p-4 text-black"
+        class="custom-shadow flex min-w-[192px] flex-col items-start gap-2 rounded-lg border border-solid border-gray-200 bg-white p-4 text-black"
     >
         <div class="text-lg font-bold">
             {{ auth.user.name }}
@@ -33,4 +33,8 @@ const logout = async () => {
     </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.custom-shadow {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+</style>
