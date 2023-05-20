@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PhPencilSimple } from 'phosphor-vue'
-import BaseModalDialog from './BaseModalDialog.vue'
 
 withDefaults(
     defineProps<{
@@ -47,7 +46,7 @@ const closeModal = () => {
             <slot name="content" />
         </div>
     </div>
-    <BaseModalDialog
+    <PageOrgProfileSectionsBaseModalDialog
         v-if="haveEditModal"
         :title="title"
         :show="isModalOpen"
@@ -55,7 +54,7 @@ const closeModal = () => {
         @negative-click="closeModal"
     >
         <slot name="modal-content" />
-    </BaseModalDialog>
+    </PageOrgProfileSectionsBaseModalDialog>
 </template>
 
 <style lang="less" scoped></style>

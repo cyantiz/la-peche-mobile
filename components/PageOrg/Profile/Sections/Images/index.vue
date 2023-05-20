@@ -17,7 +17,11 @@ const images = ref<string[]>([
 </script>
 
 <template>
-    <BaseProfileSection block title="Images" :have-edit-modal="false">
+    <PageOrgProfileSectionsBaseProfileSection
+        block
+        title="Images"
+        :have-edit-modal="false"
+    >
         <template #content>
             <div class="p-1">
                 <NAlert title="Hey! Show-off more" type="info">
@@ -34,7 +38,7 @@ const images = ref<string[]>([
             </div>
         </template>
         <template #modal-content> Edit form for biographic </template>
-    </BaseProfileSection>
+    </PageOrgProfileSectionsBaseProfileSection>
 </template>
 
 <style lang="less" scoped></style>

@@ -17,9 +17,8 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
-
 .n-button {
-    transition: all ease .2s;
+    transition: all ease 0.2s;
 
     &:hover {
         transform: translateY(-2px);
@@ -34,16 +33,15 @@ input:-webkit-autofill:active {
     position: relative;
 
     &::after {
-        content: "";
+        content: '';
         opacity: 0;
         transform: translateY(3px) scaleY(0);
         transition: transform 250ms ease 0s, opacity 250ms ease 0s;
         transform-origin: left center 0px;
     }
 
-
     &:hover::after {
-        content: "";
+        content: '';
         position: absolute;
         left: 0px;
         right: 0px;
