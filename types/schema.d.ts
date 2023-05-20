@@ -1,7 +1,7 @@
 import { Role } from './enums/Role'
 
 declare global {
-    interface User {
+    interface IUser {
         id: number | null
         username: string | null
         cluster: number | null
@@ -38,8 +38,8 @@ declare global {
         speaks: string | null
     }
 
-    type UserInformation = Omit<
-        User,
+    type IUserInformation = Omit<
+        IUser,
         | 'id'
         | 'username'
         | 'cluster'
@@ -52,4 +52,12 @@ declare global {
         | 'lastOnline'
         | 'role'
     >
+
+    type IImage = {
+        id: string
+        url: string
+        isThumbnail: boolean
+        createdAt: string
+        updatedAt: string
+    }
 }

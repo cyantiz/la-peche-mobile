@@ -62,12 +62,8 @@ const isMobile = breakPoints.smallerOrEqual('md')
                         shape="rounded-square"
                         @click="$router.push({ name: 'Messages' })"
                     >
-                        <template #icon="{ size, color }">
-                            <PhChatCenteredDots
-                                :size="size"
-                                :color="color"
-                                weight="bold"
-                            />
+                        <template #button>
+                            <PhChatCenteredDots :size="18" weight="bold" />
                         </template>
                     </HeaderItem>
                 </div>

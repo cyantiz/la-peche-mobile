@@ -27,7 +27,7 @@ defineProps<{
         <!-- Delete button (show when image available) -->
         <div
             v-if="src"
-            class="my-profile-image__delete-btn neu-border-2 absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-white text-cherry transition-all hover:-translate-y-0.5 hover:bg-cherry hover:text-white"
+            class="my-profile-image__delete-btn absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-white bg-opacity-80 text-cherry transition-all hover:-translate-y-0.5 hover:bg-cherry hover:text-white"
         >
             <PhTrash :size="16" weight="fill" />
         </div>

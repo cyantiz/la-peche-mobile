@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { useLoadingBar } from 'naive-ui'
+import { useLoadingBar, NButton } from 'naive-ui'
+import { PhSparkle } from 'phosphor-vue'
 import { useAuthStore } from '@/store/auth'
-import BasicSection from '@/components/page_organism/profile/sections/Basic.vue'
-import RelationShipGoalSection from '@/components/page_organism/profile/sections/RelationshipGoal.vue'
-import JobAndEducationSection from '@/components/page_organism/profile/sections/JobAndEducation.vue'
-import AdditionalInfoSection from '@/components/page_organism/profile/sections/AdditionalInfo.vue'
-import BiographicSection from '@/components/page_organism/profile/sections/Biographic.vue'
-import ImagesSection from '@/components/page_organism/profile/sections/Images/index.vue'
+
 defineProps<{}>()
 
 const { user } = useAuthStore()
 
 // test asyncData
-const { data, pending, error } = await useAsyncData<UserInformation>(() => {
-    return useApiGet<UserInformation>(`/users/info/${user.username}`)
+const { data, pending, error } = await useAsyncData<IUserInformation>(() => {
+    return useApiGet<IUserInformation>(`/users/info/${user.username}`)
 })
 
 const loadingBar = useLoadingBar()
@@ -38,15 +34,17 @@ onMounted(() => {
 
     <div v-else>
         <div
-            class="profile-sections flex w-full flex-col justify-between gap-4 xl:flex-row"
+            class="profile-sections flex w-full flex-col justify-between gap-4 pb-16 xl:flex-row"
         >
             <div class="flex w-full flex-col items-center gap-4">
-                <BiographicSection :biographic="data.biographic" />
-                <ImagesSection />
+                <PageOrgProfileSectionsBiographic
+                    :biographic="data.biographic"
+                />
+                <PageOrgProfileSectionsImages />
             </div>
 
             <div class="flex w-full flex-col items-center gap-4">
-                <BasicSection
+                <PageOrgProfileSectionsBasic
                     :name="data.name"
                     :gender="data.gender"
                     :year-of-birth="data.yearOfBirth"
@@ -55,18 +53,18 @@ onMounted(() => {
                     :ethnicity="data.ethnicity"
                 />
 
-                <RelationShipGoalSection
+                <PageOrgProfileSectionsRelationshipGoal
                     :orientation="data.orientation"
                     :relationship-goal="'Long-term partner'"
                 />
 
-                <JobAndEducationSection
+                <PageOrgProfileSectionsJobAndEducation
                     :job="data.job"
                     :education="data.education"
                     :income="data.income"
                 />
 
-                <AdditionalInfoSection
+                <PageOrgProfileSectionsAdditionalInfo
                     :speaks="data.speaks"
                     :offspring="data.offspring"
                     :pets="data.pets"
@@ -77,8 +75,32 @@ onMounted(() => {
                     :sign="data.sign"
                 />
             </div>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+                <div
+                    class="preview-btn-container h-full w-full rounded-lg bg-white px-16 py-2"
+                >
+                    <NButton size="large" block>
+                        <template #icon>
+                            <PhSparkle />
+                        </template>
+                        Preview
+                    </NButton>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.preview-btn-container {
+    // background gradient from white -> transparent
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 20%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 1) 100%
+    );
+}
+</style>

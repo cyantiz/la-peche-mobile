@@ -126,17 +126,18 @@ const themeOceanOverrides: GlobalThemeOverrides = {
         borderFocusWarning: '3px solid ' + Color.GreenApple,
     },
     Alert: {
-        border: '2px solid ' + Color.Ocean,
-        borderInfo: '2px solid ' + Color.GreenApple,
+        border: '1px solid ' + Color.Ocean,
+        borderInfo: '1px solid ' + Color.GreenApple,
         iconColorInfo: Color.GreenApple,
-        borderWarning: '2px solid ' + Color.GoldMetallic,
-        borderError: '2px solid ' + Color.Cherry,
+        borderWarning: '1px solid ' + Color.GoldMetallic,
+        borderError: '1px solid ' + Color.Cherry,
     },
     Dialog: {
         borderRadius: '16px',
         closeColorHover: 'rgba(0, 0, 0, 0)',
     },
     Modal: {},
+    Card: {},
 }
 
 export default themeOceanOverrides

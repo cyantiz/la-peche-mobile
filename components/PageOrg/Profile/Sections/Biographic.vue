@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseProfileSection from './base/BaseProfileSection.vue'
+import BaseProfileSection from './Base/BaseProfileSection.vue'
 defineProps<{
     biographic: string | null
 }>()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NAlert } from 'naive-ui'
-import BaseProfileSection from '../base/BaseProfileSection.vue'
+import BaseProfileSection from '../Base/BaseProfileSection.vue'
 import Image from './Image.vue'
 useHead({
     title: 'My Profile',

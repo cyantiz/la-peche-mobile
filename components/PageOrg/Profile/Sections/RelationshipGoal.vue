@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PhEye, PhUserFocus } from 'phosphor-vue'
-import BaseProfileSectionTable from './base/BaseProfileSectionTable.vue'
+import BaseProfileSectionTable from './Base/BaseProfileSectionTable.vue'
 const props = defineProps<{
     // no using Pick from UserInformation type because of Vue issue (fixed in 3.3.0 but using 3.2.47 now)
     orientation: string | null

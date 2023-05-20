@@ -40,12 +40,12 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from '@vueuse/core'
 import { NLayoutSider, NLayout, useLoadingBar } from 'naive-ui'
-import { COLLAPSED_SIDEBAR_PAGES } from './config'
+// import { COLLAPSED_SIDEBAR_PAGES } from './config'
 import SidebarMenu from '@/components/SidebarMenu/index.vue'
 import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
-const route = useRoute()
+// const route = useRoute()
 const loadingBar = useLoadingBar()
 
 const isAuthLoading = computed(() => auth.loading)
@@ -56,11 +56,11 @@ const isShowLayoutCurtain = ref<boolean>(true)
 const breakPoints = useBreakpoints(breakpointsTailwind)
 // handle dynamic styling for sidebar
 
-const isCollapsedSidebar = computed(
-    () =>
-        COLLAPSED_SIDEBAR_PAGES.includes(String(route.name)) ||
-        breakPoints.smallerOrEqual('lg').value
-)
+// const isCollapsedSidebar = computed(
+//     () =>
+//         COLLAPSED_SIDEBAR_PAGES.includes(String(route.name)) ||
+//         breakPoints.smallerOrEqual('lg').value
+// )
 
 // handle dynamic styling for header
 const isMobile = breakPoints.smallerOrEqual('md')
