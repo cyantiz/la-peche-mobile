@@ -1,6 +1,6 @@
 @import url('assets/css/colors.less');
 
-html[theme="BitterSweet"],
+html[theme='BitterSweet'],
 html {
     --theme-primary-color: @color-bittersweet;
     --theme-primary-color-hover: @color-bittersweet-hover;
@@ -9,7 +9,7 @@ html {
     --theme-primary-color-dim-2: rgba(@color-bittersweet, 0.2);
 }
 
-html[theme="Ocean"] {
+html[theme='Ocean'] {
     --theme-primary-color: @color-ocean;
     --theme-primary-color-hover: @color-ocean-hover;
     --theme-primary-color-pressed: @color-ocean-pressed;
@@ -19,9 +19,6 @@ html[theme="Ocean"] {
 
 .layout-org {
     box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.15);
-
-    position: relative;
-    z-index: 2;
 }
 
 .text-theme {
@@ -60,7 +57,6 @@ html[theme="Ocean"] {
     border-right-color: var(--theme-primary-color);
 }
 
-
 .hover {
     &\:bg-theme:hover {
         background-color: var(--theme-primary-color);
@@ -93,8 +89,6 @@ html[theme="Ocean"] {
     &\:border-r-theme:hover {
         border-right-color: var(--theme-primary-color);
     }
-
-
 }
 
 .focus {

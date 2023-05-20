@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { NAlert } from 'naive-ui'
-import BaseProfileSection from '../base/BaseProfileSection.vue'
 import Image from './Image.vue'
 useHead({
     title: 'My Profile',
@@ -17,7 +16,11 @@ const images = ref<string[]>([
 </script>
 
 <template>
-    <BaseProfileSection block title="Images" :have-edit-modal="false">
+    <PageOrgProfileSectionsBaseProfileSection
+        block
+        title="Images"
+        :have-edit-modal="false"
+    >
         <template #content>
             <div class="p-1">
                 <NAlert title="Hey! Show-off more" type="info">
@@ -34,7 +37,7 @@ const images = ref<string[]>([
             </div>
         </template>
         <template #modal-content> Edit form for biographic </template>
-    </BaseProfileSection>
+    </PageOrgProfileSectionsBaseProfileSection>
 </template>
 
 <style lang="less" scoped></style>

@@ -1,25 +1,43 @@
 <script setup lang="ts">
-import { NCarousel, NCarouselItem, NIcon } from 'naive-ui'
+import { NCarousel, NCarouselItem, NIcon, NImage, NSpin } from 'naive-ui'
 import { PhArrowLeft, PhArrowRight } from 'phosphor-vue'
-defineProps<{
-    images: Array<{
-        id: number
-        url: string
-    }>
-}>()
+
+withDefaults(
+    defineProps<{
+        images: Array<IImage>
+        slidesPerView: number
+    }>(),
+    {
+        slidesPerView: 1,
+    }
+)
 </script>
 
 <template>
-    <NCarousel show-arrow :slides-per-view="2" class="rounded-xl">
+    <NCarousel
+        show-arrow
+        :slides-per-view="slidesPerView"
+        class="rounded-lg"
+        :loop="true"
+    >
         <NCarouselItem
             v-for="image in images"
             :key="image.id"
             class="aspect-[3/4]"
         >
-            <img
-                class="carousel-img aspect-[3/4] h-full object-cover object-center"
-                :src="image.url"
-            />
+            <div class="profile-carousel-img flex aspect-[3/4]">
+                <div class="flex h-full w-full items-stretch justify-stretch">
+                    <NImage :src="image.url" object-fit="cover" lazy>
+                        <template #placeholder>
+                            <div
+                                class="flex h-full w-full items-center justify-center bg-slate-200"
+                            >
+                                <NSpin />
+                            </div>
+                        </template>
+                    </NImage>
+                </div>
+            </div>
         </NCarouselItem>
         <template #arrow="{ prev, next }">
             <div class="custom-arrow">
@@ -48,7 +66,7 @@ defineProps<{
 .custom-arrow {
     display: flex;
     position: absolute;
-    bottom: 25px;
+    top: 20px;
     right: 10px;
 }
 
@@ -59,8 +77,8 @@ defineProps<{
     width: 28px;
     height: 28px;
     margin-right: 12px;
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8);
     border-width: 0;
     border-radius: 8px;
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,7 +86,7 @@ defineProps<{
 }
 
 .custom-arrow button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .custom-arrow button:active {
@@ -81,7 +99,7 @@ defineProps<{
     margin: 0;
     padding: 0;
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     left: 20px;
 }
 
@@ -91,13 +109,22 @@ defineProps<{
     height: 4px;
     margin: 0 3px;
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(2555, 2555, 255, 0.4);
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.4);
     transition: width 0.3s, background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
 
 .custom-dots li.is-active {
     width: 40px;
-    background: #fff;
+    background: white;
+}
+</style>
+
+<style lang="less">
+.profile-carousel-img .n-image img,
+.profile-carousel-img .n-image {
+    width: 100%;
+    height: 100%;
 }
 </style>

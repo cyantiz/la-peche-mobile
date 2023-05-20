@@ -136,6 +136,7 @@ const themeBitterSweetOverrides: GlobalThemeOverrides = {
         closeColorHover: 'rgba(0, 0, 0, 0)',
     },
     Modal: {},
+    Card: {},
 }
 
 export default themeBitterSweetOverrides

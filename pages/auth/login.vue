@@ -96,7 +96,6 @@ onMounted(() => {
                 :rules="loginFormRules"
                 label-position="top"
                 class="flex flex-col gap-0.5"
-                auto-complete="false"
                 @submit.prevent="submitForm"
             >
                 <NFormItem
@@ -107,8 +106,8 @@ onMounted(() => {
                 >
                     <NInput
                         v-model:value="form.username"
-                        auto-complete="false"
                         placeholder="@username"
+                        :input-props="{ autocomplete: 'off' }"
                         @keydown.enter.prevent
                     />
                 </NFormItem>
@@ -122,6 +121,7 @@ onMounted(() => {
                         v-model:value="form.password"
                         type="password"
                         placeholder="∗∗∗∗∗∗"
+                        :input-props="{ autocomplete: 'off' }"
                         @keydown.enter.prevent
                     />
                 </NFormItem>

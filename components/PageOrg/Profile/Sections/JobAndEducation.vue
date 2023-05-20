@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PhBriefcase, PhGraduationCap, PhMoney } from 'phosphor-vue'
-import BaseProfileSectionTable from './base/BaseProfileSectionTable.vue'
 const props = defineProps<{
     // no using Pick from UserInformation type because of Vue issue (fixed in 3.3.0 but using 3.2.47 now)
     job: string | null
@@ -28,12 +27,12 @@ const informationRecords = [
 </script>
 
 <template>
-    <BaseProfileSectionTable
+    <PageOrgProfileSectionsBaseProfileSectionTable
         title="Job and Education"
         :information-records="informationRecords"
     >
         <template #modal-content> Edit form cho basic information </template>
-    </BaseProfileSectionTable>
+    </PageOrgProfileSectionsBaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>
