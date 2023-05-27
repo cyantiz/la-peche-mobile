@@ -2,7 +2,13 @@
 import { CSSProperties } from 'vue'
 import { VNodeRef } from 'vue'
 
-defineEmits(['showDetailBtnClick'])
+const emit = defineEmits([
+    'showDetailBtnClick',
+    'like',
+    'dislike',
+    'star',
+    'dismiss',
+])
 
 const props = withDefaults(
     defineProps<{
@@ -46,7 +52,7 @@ const handleCardTouchStart = (e: TouchEvent) => {
     const { clientX, clientY } = touch
     properties.startPoint = { x: clientX, y: clientY }
     document.addEventListener('touchmove', handleTouchMove)
-    style.transition = 'transform 0s'
+    style.transition = 'transform .3s'
 }
 
 const handleTouchMove = (e: TouchEvent) => {
@@ -59,7 +65,8 @@ const handleTouchMove = (e: TouchEvent) => {
 
 const handleTouchEnd = () => {
     // dismiss card
-    if (Math.abs(properties.offsetX) > cardRef.value.clientWidth * 0.7) {
+
+    if (Math.abs(properties.offsetX) > cardRef.value.clientWidth * 0.2) {
         dismiss(properties.offsetX > 0 ? 1 : -1)
         return
     }
@@ -78,9 +85,7 @@ const handleCardMouseDown = (e: MouseEvent) => {
 
 const handleMouseMove = (e: MouseEvent) => {
     e.preventDefault()
-    console.log('mouse move')
     const { clientX, clientY } = e
-    console.log('client x y', { clientX, clientY })
     handleMove(clientX, clientY)
 }
 
@@ -102,7 +107,12 @@ const handleMove = (x: number, y: number) => {
 
     properties.offsetX = x - properties.startPoint.x
     properties.offsetY = y - properties.startPoint.y
-    const rotate = properties.offsetX * 0.1
+
+    /*
+     * @param rotate
+     */
+    const rotate = Math.min(Math.max(properties.offsetX * 0.1, -30), 30)
+    console.log('rotate', rotate)
     style.transform = `translate(${properties.offsetX}px, ${properties.offsetY}px) rotate(${rotate}deg)`
 }
 
@@ -110,36 +120,25 @@ const dismiss = (direction: 1 | -1) => {
     properties.startPoint = null
     document.removeEventListener('mouseup', handleMouseUp)
     document.removeEventListener('mousemove', handleMouseMove)
-    // document.removeEventListener('touchend', handleTouchEnd)
-    // document.removeEventListener('touchmove', handleTouchMove)
+    document.removeEventListener('touchend', handleTouchEnd)
+    document.removeEventListener('touchmove', handleTouchMove)
     style.transition = 'transform 1s'
-    style.transform = `translate(${direction * window.innerWidth}px, ${
+    style.transform = `translate(${direction * window.innerWidth * 1.5}px, ${
         properties.offsetY
-    }px) rotate(${90 * direction}deg)`
+    }px) rotate(${45 * direction}deg)`
     cardRef.value.classList.add('dismissing')
     setTimeout(() => {
         cardRef.value.remove()
     }, 1000)
 
-    onDismiss()
+    emit('dismiss')
+
     if (direction === 1) {
-        onLike()
+        emit('like')
     }
     if (direction === -1) {
-        onDislike()
+        emit('dislike')
     }
-}
-
-const onLike = () => {
-    console.log('like')
-}
-
-const onDislike = () => {
-    console.log('dislike')
-}
-
-const onDismiss = () => {
-    console.log('dismiss')
 }
 
 const isTouchDevice = () => {
@@ -148,8 +147,6 @@ const isTouchDevice = () => {
 
 watchEffect(() => {
     if (cardRef.value) {
-        console.log('cardRef', cardRef.value)
-
         if (isTouchDevice()) {
             document.addEventListener('touchend', handleTouchEnd)
         } else {
@@ -165,14 +162,14 @@ watchEffect(() => {
     <ClientOnly>
         <div
             ref="cardRef"
-            class="__info card absolute mx-auto flex w-[420px] cursor-pointer flex-col items-center gap-4 rounded-xl bg-white p-4"
+            class="__info recommendation-card absolute mx-auto flex w-full max-w-[570px] cursor-pointer flex-col items-center gap-4 overflow-scroll rounded-xl bg-white p-4 md:w-[420px] md:overflow-auto"
             :style="{ '--index': index, ...style }"
             @drag="(e) => e.preventDefault()"
             @mousedown="handleCardMouseDown"
             @touchstart="handleCardTouchStart"
         >
-            <div class="relative flex">
-                <div class="__info__images flex w-full">
+            <div class="relative flex md:w-full">
+                <div class="__info__images flex md:w-full">
                     <PageOrgDatingRecImageCarousel
                         :images="infoWithImages.images"
                         :slides-per-view="1"
@@ -204,18 +201,34 @@ watchEffect(() => {
                 </div>
             </div>
             <div class="actions flex items-start gap-6">
-                <PageOrgDatingRecActionButton type="dislike" />
-                <PageOrgDatingRecActionButton type="star" />
-                <PageOrgDatingRecActionButton type="like" />
+                <PageOrgDatingRecActionButton
+                    type="dislike"
+                    @button-click.stop="$emit('dislike')"
+                    @button-mouse-down.stop="(e) => {}"
+                />
+                <PageOrgDatingRecActionButton
+                    type="star"
+                    @button-click.stop="$emit('star')"
+                />
+                <PageOrgDatingRecActionButton
+                    type="like"
+                    @button-click.stop="$emit('like')"
+                />
             </div>
         </div>
     </ClientOnly>
 </template>
 
 <style lang="less" scoped>
-.card {
+.recommendation-card {
     transform: translateZ(calc(-3px * var(--index)))
         translateY(calc(-3px * var(--index))) rotate(calc(-1deg * var(--index)));
-    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+        transform: none;
+        box-shadow: none;
+        overflow: hidden;
+    }
 }
 </style>

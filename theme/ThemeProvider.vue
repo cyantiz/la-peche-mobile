@@ -31,7 +31,7 @@ watch(
 </script>
 
 <template>
-    <NConfigProvider :theme-overrides="themeOverride">
+    <NConfigProvider :theme-overrides="themeOverride" class="h-full w-full">
         <NDialogProvider>
             <NLoadingBarProvider>
                 <NNotificationProvider

@@ -10,6 +10,8 @@ withDefaults(
         shadow: true,
     }
 )
+
+defineEmits(['buttonClick', 'buttonMouseDown'])
 </script>
 
 <template>
@@ -17,6 +19,8 @@ withDefaults(
         v-if="type === 'like'"
         class="like-btn cursor-pointer rounded-full bg-bitter-sweet p-3 leading-[0] transition-all duration-200 hover:-translate-y-0.5"
         :class="{ _shadow: shadow }"
+        @click="$emit('buttonClick')"
+        @mousedown="$emit('buttonMouseDown')"
     >
         <PhHeart size="24" weight="fill" color="white" />
     </div>

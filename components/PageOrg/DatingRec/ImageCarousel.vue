@@ -5,8 +5,8 @@ import { PhCaretLeft, PhCaretRight } from 'phosphor-vue'
 withDefaults(
     defineProps<{
         images: Array<IImage>
-        slidesPerView: number
-        previewDisabled: boolean
+        slidesPerView?: number
+        previewDisabled?: boolean
     }>(),
     {
         slidesPerView: 1,

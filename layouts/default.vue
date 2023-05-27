@@ -1,5 +1,5 @@
 <template>
-    <div class="flex w-screen flex-col bg-[#F8FAFF]">
+    <div class="flex h-full w-screen flex-col bg-[#F8FAFF]">
         <LayoutCurtain :show="isShowLayoutCurtain || isAuthLoading" />
         <ClientOnly>
             <Header />
@@ -29,7 +29,7 @@
             >
                 <div class="h-full w-full md:p-4">
                     <div
-                        class="layout-org h-full w-full overflow-y-scroll bg-white p-4 md:rounded-lg"
+                        class="layout-org h-full w-full overflow-y-scroll bg-white md:rounded-lg md:p-4"
                     >
                         <slot />
                     </div>
@@ -73,13 +73,13 @@ router.beforeEach(() => {
 <style lang="less" scoped>
 @navbar-height-desktop: 64px;
 @navbar-height-mobile: 108px;
-@breakpoint-mobile: 726px;
+@breakpoint-mobile: 768px;
 div.body {
     height: calc(100vh - @navbar-height-desktop);
 }
 @media (max-width: @breakpoint-mobile) {
     div.body {
-        height: calc(100vh - @navbar-height-mobile);
+        max-height: calc(100vh - @navbar-height-mobile);
     }
 }
 </style>
