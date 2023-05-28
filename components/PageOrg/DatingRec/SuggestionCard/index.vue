@@ -65,7 +65,10 @@ const handleTouchMove = (e: TouchEvent) => {
 const handleTouchEnd = () => {
     // dismiss card
 
-    if (Math.abs(properties.offsetX) > cardRef.value.clientWidth * 0.2) {
+    if (
+        Math.abs(properties.offsetX) >
+        cardRef.value.clientWidth * swipeLimitRatioTouchDevice
+    ) {
         dismiss(properties.offsetX > 0 ? 1 : -1)
         return
     }
@@ -90,7 +93,10 @@ const handleMouseMove = (e: MouseEvent) => {
 
 const handleMouseUp = () => {
     // dismiss card
-    if (Math.abs(properties.offsetX) > cardRef.value.clientWidth * 0.7) {
+    if (
+        Math.abs(properties.offsetX) >
+        cardRef.value.clientWidth * swipeLimitRatioDesktop
+    ) {
         dismiss(properties.offsetX > 0 ? 1 : -1)
         return
     }
@@ -151,13 +157,39 @@ watchEffect(() => {
         // not mounted yet, or the element was unmounted (e.g. by v-if)
     }
 })
+
+const isDraggingToLike = computed(() => {
+    if (!cardRef.value) return false
+
+    const limitRatio = isTouchDevice()
+        ? swipeLimitRatioTouchDevice
+        : swipeLimitRatioDesktop
+
+    return (
+        Math.abs(properties.offsetX) > cardRef.value.clientWidth * limitRatio &&
+        properties.offsetX > 0
+    )
+})
+
+const isDraggingToDislike = computed(() => {
+    if (!cardRef.value) return false
+
+    const limitRatio = isTouchDevice()
+        ? swipeLimitRatioTouchDevice
+        : swipeLimitRatioDesktop
+
+    return (
+        Math.abs(properties.offsetX) > cardRef.value.clientWidth * limitRatio &&
+        properties.offsetX < 0
+    )
+})
 </script>
 
 <template>
     <ClientOnly>
         <div
             ref="cardRef"
-            class="__info recommendation-card absolute mx-auto flex w-full max-w-[570px] cursor-pointer select-none flex-col items-center gap-4 overflow-scroll rounded-xl bg-white p-4 md:w-[420px] md:overflow-auto"
+            class="__info recommendation-card absolute mx-auto flex w-full max-w-[480px] cursor-pointer select-none flex-col items-center gap-4 overflow-scroll rounded-xl bg-white p-4 md:w-[420px] md:overflow-auto"
             :style="{ '--index': index, ...style }"
             @drag="(e) => e.preventDefault()"
             @mousedown="handleCardMouseDown"
@@ -170,6 +202,28 @@ watchEffect(() => {
                         :slides-per-view="1"
                         :preview-disabled="true"
                     />
+                </div>
+
+                <div
+                    v-if="$refs.cardRef"
+                    class="__info__dismiss_text absolute top-10 flex w-full justify-between px-4 text-white"
+                >
+                    <div
+                        :style="{
+                            opacity: isDraggingToDislike ? 1 : 0,
+                        }"
+                        class="-rotate-12 rounded-xl border-2 border-solid border-gold-metallic px-4 py-2 text-xl font-bold uppercase text-gold-metallic shadow-xl transition-all"
+                    >
+                        Skip
+                    </div>
+                    <div
+                        :style="{
+                            opacity: isDraggingToLike ? 1 : 0,
+                        }"
+                        class="rotate-12 rounded-xl border-2 border-solid border-bitter-sweet px-4 py-2 text-xl font-bold uppercase text-bitter-sweet shadow-xl transition-all duration-100"
+                    >
+                        Like
+                    </div>
                 </div>
 
                 <div
@@ -218,10 +272,6 @@ watchEffect(() => {
 
 <style lang="less" scoped>
 .recommendation-card {
-    transform: translateZ(calc(-3px * var(--index)))
-        translateY(calc(-3px * var(--index))) rotate(calc(-1deg * var(--index)));
-    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.2);
-
     @media (max-width: 768px) {
         transform: none;
         box-shadow: none;

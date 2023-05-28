@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useLoadingBar } from 'naive-ui'
-import { PhHeart } from 'phosphor-vue'
 import { useAuthStore } from '~/store/auth'
 import { useRecommendationStore } from '~/store/recommendation'
 useHead({
@@ -37,12 +36,9 @@ const openDetail = (_infoWithImages: IUserInformationWithImages) => {
 
 <template>
     <div v-if="auth.loading">auth loading</div>
-    <div
-        class="relative flex h-full w-full items-center justify-center overflow-hidden"
-    >
-        <PhHeart
-            weight="fill"
-            class="absolute h-full w-full text-bitter-sweet opacity-10 blur-lg"
+    <div class="relative flex h-full w-full items-center justify-center">
+        <div
+            class="absolute aspect-square h-full rounded-full bg-bitter-sweet text-bitter-sweet opacity-20 blur-xl"
         />
         <template v-if="recommendations">
             <PageOrgDatingRecSuggestionCard

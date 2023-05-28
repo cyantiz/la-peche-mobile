@@ -29,7 +29,7 @@
             >
                 <div class="h-full w-full md:p-4">
                     <div
-                        class="layout-org h-full w-full overflow-y-scroll bg-white md:rounded-lg md:p-4"
+                        class="layout-org h-full w-full overflow-x-hidden overflow-y-scroll bg-white md:rounded-lg md:p-4"
                     >
                         <slot />
                     </div>
