@@ -9,6 +9,7 @@ import {
     PhDog,
     PhTranslate,
     PhLeaf,
+    PhMoonStars,
     PhMartini,
     PhBaby,
     PhUserFocus,
@@ -105,7 +106,7 @@ const age = computed(() => {
                     />
                     <PageOrgDatingRecDetailInformationTag
                         v-show="info?.sign"
-                        :icon="PhLeaf"
+                        :icon="PhMoonStars"
                         :text="info?.sign"
                     />
                     <PageOrgDatingRecDetailInformationTag

@@ -23,7 +23,7 @@ defineEmits(['addButtonClick'])
         :class="{ 'w-full ': block }"
     >
         <div
-            class="inline-flex items-center self-start"
+            class="inline-flex items-center gap-2 self-start"
             :class="{ 'w-full': block }"
         >
             <slot name="icon" :size="18" color="black" />
