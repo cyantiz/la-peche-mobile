@@ -37,6 +37,7 @@ const isShowPreview = ref(false)
 const loadingBar = useLoadingBar()
 onMounted(() => {
     localData.value = data.value
+    localData.value?.images.sort((a, b) => a.order - b.order)
     if (!process.client) return
     setTimeout(() => loadingBar.finish(), 1)
 })
@@ -126,7 +127,7 @@ onMounted(() => {
             <Transition name="fade">
                 <PreviewMyProfile
                     v-if="data && isShowPreview"
-                    :info-with-images="data"
+                    :info-with-images="localData"
                     @close="isShowPreview = false"
                 />
             </Transition>

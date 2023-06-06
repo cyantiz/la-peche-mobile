@@ -20,7 +20,6 @@ import globalEthnicities from '~/utils/global-ethnicities'
 import { useAreaStore } from '~/store/area'
 import { useAuthStore } from '~/store/auth'
 import { useProfileStore } from '~/store/profile'
-import { Gender } from '~/types/enums/Gender'
 const props = defineProps<{
     // no using Pick from UserInformation type because of Vue issue (fixed in 3.3.0 but using 3.2.47 now)
     name: string | null
@@ -39,7 +38,7 @@ const informationRecords = computed(() => [
     },
     {
         title: 'Gender',
-        content: props.gender,
+        content: getGender(props.gender),
         iconComponent: PhUserFocus,
     },
     {
@@ -79,9 +78,15 @@ const notification = useNotification()
 
 const pending = ref(false)
 
-const genderOptions = Object.values(Gender).map((item) => ({
-    label: item,
-    value: item,
+const gender: Record<string, string> = {
+    m: 'Man',
+    f: 'Woman',
+    o: 'Others',
+}
+
+const genderOptions = Object.keys(gender).map((key) => ({
+    label: gender[key],
+    value: key,
 }))
 
 if (props.location?.split(',')[0]) {
@@ -203,7 +208,6 @@ const updateBasicInfo = async (closeModal: () => void) => {
                     label-width="120px"
                     label-align="left"
                     @submit.prevent="updateBasicInfo(closeModal)"
-                    @keydown.enter.prevent="updateBasicInfo(closeModal)"
                 >
                     <NFormItem
                         size="large"
@@ -243,6 +247,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NSelect
                             v-model:value="patchingData.yearOfBirth"
                             placeholder="Which year were you born?"
+                            filterable
                             :input-props="{ autocomplete: 'off' }"
                             :options="yearOfBirthOptions"
                             @keydown.enter.prevent
@@ -258,6 +263,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NSelect
                             v-model:value="patchingData.ethnicity"
                             placeholder="E.g: Vietnamese"
+                            filterable
                             :input-props="{ autocomplete: 'off' }"
                             :options="ethnicityOptions"
                             @keydown.enter.prevent
@@ -272,7 +278,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NInputNumber
                             v-model:value="patchingData.height"
                             :loading="area.loading"
-                            placeholder="170"
+                            placeholder="Enter your height"
                             :min="1"
                             :max="300"
                             :input-props="{ autocomplete: 'off' }"
@@ -291,6 +297,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NSelect
                             v-model:value="areaCode.province"
                             placeholder="Province"
+                            filterable
                             :input-props="{ autocomplete: 'off' }"
                             :options="provinceOptions"
                             @keydown.enter.prevent
@@ -305,6 +312,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NSelect
                             v-model:value="areaCode.district"
                             placeholder="District"
+                            filterable
                             :input-props="{ autocomplete: 'off' }"
                             :options="districtOptions"
                             @keydown.enter.prevent
@@ -319,6 +327,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         <NSelect
                             v-model:value="areaCode.commune"
                             placeholder="Commune"
+                            filterable
                             :input-props="{ autocomplete: 'off' }"
                             :options="communeOptions"
                             @keydown.enter.prevent

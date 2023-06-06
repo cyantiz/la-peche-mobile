@@ -59,6 +59,6 @@ router.beforeEach(() => {
 .bg-image {
     background-image: url('https://res.cloudinary.com/cyantiz/image/upload/v1685643208/lapeche/static/np_file_210391_ez4lkx.jpg');
     background-position: center;
-    object-fit: cover;
+    background-size: cover;
 }
 </style>

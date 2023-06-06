@@ -26,6 +26,12 @@ export interface UpdateProfileDTO {
 export interface UploadImageDTO {
     url: string
     isThumbnail: boolean
+    order?: number
+}
+
+export interface ChangeImageOrderDTO {
+    id: number
+    newOrder: number
 }
 
 interface IProfileStoreState {}
@@ -34,6 +40,11 @@ export const useProfileStore = defineStore({
     id: 'profile',
     state: () => ({} as IProfileStoreState),
     actions: {
+        getProfile(username: string) {
+            return useApiGet<IUserInformationWithImages>(
+                `/users/info-with-images/${username}`
+            )
+        },
         updateProfile(payload: UpdateProfileDTO) {
             // get username, and other field (store in profileInfo) from payload
             const { username, ...profileInfo } = payload
@@ -55,6 +66,14 @@ export const useProfileStore = defineStore({
 
             return useApiPost<IImage>('/users/images', {
                 body: payload,
+            })
+        },
+        deleteImage(imageId: number | string) {
+            return useApiDelete<void>(`/users/images/${+imageId}`)
+        },
+        changeOrder(payload: ChangeImageOrderDTO) {
+            return useApiPut<void>(`/users/images/order/${payload.id}`, {
+                body: { order: payload.newOrder },
             })
         },
     },

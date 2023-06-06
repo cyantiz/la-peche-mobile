@@ -44,7 +44,9 @@
         "pinia": "^2.0.29",
         "url-pattern": "^1.0.3",
         "uuid": "^9.0.0",
-        "vfonts": "^0.0.3"
+        "vfonts": "^0.0.3",
+        "vue-draggable-next": "^2.2.0",
+        "vuedraggable": "^4.1.0"
     },
     "overrides": {
         "vue": "latest"

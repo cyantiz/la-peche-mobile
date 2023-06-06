@@ -8,6 +8,7 @@ import {
     NInputNumber,
     NAutoComplete,
 } from 'naive-ui'
+
 import { useAuthStore } from '~/store/auth'
 import { useProfileStore } from '~/store/profile'
 // import { Income } from '~/types/enums/Income'
@@ -32,7 +33,7 @@ const informationRecords = computed(() => [
     },
     {
         title: 'Income',
-        content: '$ ' + props.income,
+        content: props?.income ? '$ ' + props.income : null,
         iconComponent: PhMoney,
     },
 ])

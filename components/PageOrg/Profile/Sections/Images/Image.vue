@@ -6,9 +6,18 @@ import { PhUpload, PhTrash } from 'phosphor-vue'
 import { useAuthStore } from '~/store/auth'
 import { useProfileStore } from '~/store/profile'
 const props = defineProps<{
+    id: number
     src: string
+    newOrder?: number
 }>()
-const emits = defineEmits(['uploading', 'uploaded'])
+const emits = defineEmits([
+    'uploading',
+    'uploaded',
+    'uploadFailed',
+    'deleting',
+    'deleted',
+    'deleteFailed',
+])
 
 const randomId = ref(uuid4())
 const notification = useNotification()
@@ -39,6 +48,7 @@ const handleUpload = async (e: Event) => {
         const newImage = await profile.addImage({
             url: secure_url,
             isThumbnail: false,
+            order: props.newOrder,
         })
 
         if (!newImage)
@@ -48,6 +58,20 @@ const handleUpload = async (e: Event) => {
     } catch (error) {
         notification.error({
             title: 'Upload failed',
+        })
+        emits('uploadFailed')
+    }
+}
+
+const handleDelete = async () => {
+    try {
+        emits('deleting')
+        await profile.deleteImage(props.id)
+        emits('deleted', props.id)
+    } catch (error) {
+        emits('deleteFailed')
+        notification.error({
+            title: 'Delete failed',
         })
     }
 }
@@ -88,6 +112,7 @@ const handleUpload = async (e: Event) => {
         <div
             v-if="src"
             class="my-profile-image__delete-btn absolute right-4 top-4 flex h-6 w-6 cursor-pointer items-center justify-center rounded-md bg-white bg-opacity-80 text-[12px] text-cherry transition-all hover:-translate-y-0.5 hover:bg-cherry hover:text-white md:h-8 md:w-8 md:text-base"
+            @click="handleDelete"
         >
             <PhTrash weight="fill" />
         </div>

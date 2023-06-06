@@ -28,7 +28,7 @@ export const universities: string[] = [
     'University of Natural Sciences, Vietnam National University, Ho Chi Minh City',
     'Vietnam National University of Arts Education',
     'Vietnam National University of Theater and Cinema',
-    'Danang University of Science and Technology ',
+    'Danang University of Technology',
     'Hanoi University of Business and Technology',
     'Hanoi Open University',
     'Ho Chi Minh City University of Architecture',

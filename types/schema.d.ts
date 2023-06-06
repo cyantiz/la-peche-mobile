@@ -53,11 +53,12 @@ declare global {
     >
 
     type IImage = {
-        id: string
+        id: number
         url: string
         isThumbnail: boolean
         createdAt: string
         updatedAt: string
+        order: number
     }
 
     type IUserInformationWithImages = IUserInformation & {

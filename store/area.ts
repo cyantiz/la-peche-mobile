@@ -53,7 +53,6 @@ export const useAreaStore = defineStore('area', {
     },
     actions: {
         init() {
-            console.log('init')
             const provinces = localStorage.getItem('provinces')
             const districts = localStorage.getItem('districts')
             const communes = localStorage.getItem('communes')
