@@ -86,3 +86,35 @@ export const registerFormRules: FormRules = {
         },
     ],
 }
+
+export const requestResetPasswordFromRules: FormRules = {
+    email: [
+        {
+            required: true,
+            message: 'Please enter your email',
+            trigger: 'blur',
+        },
+        {
+            type: 'email',
+            message: 'Please enter a valid email',
+            trigger: 'blur',
+        },
+    ],
+}
+
+export const resetPasswordFromRules: FormRules = {
+    password: [
+        {
+            required: true,
+            message: 'Please enter your password',
+            trigger: 'blur',
+        },
+        {
+            min: 6,
+            max: 32,
+            pattern: /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+            message: 'Password length should be between 6 and 32 characters',
+            trigger: 'blur',
+        },
+    ],
+}

@@ -1,18 +1,55 @@
 import jwtDecode from 'jwt-decode'
 import { defineStore } from 'pinia'
-import {
-    LoginResponse,
-    LoginRequestBody,
-    AuthUser,
-    AuthPayload,
-    RegisterRequestBody,
-    RegisterResponse,
-} from '~/types/api/auth'
+import { Role } from '~/types/enums/Role'
+
+export type LoginRequestDto = {
+    username: string
+    password: string
+}
+
+export type LoginResponse = {
+    accessToken: string
+    refreshToken: string
+}
+
+export type AuthPayload = {
+    id: number
+    email: string
+    name: string
+    role: Role
+    username: string
+    avatarUrl: string
+    iat: number
+    exp: number
+}
+
+export type AuthUser = Omit<AuthPayload, 'iat' | 'exp'>
+
+export type RegisterRequestDto = {
+    email: string
+    name: string
+    username: string
+    password: string
+}
+
+export type RegisterResponse = {
+    accessToken: string
+    refreshToken: string
+}
 
 type AuthData = {
     access_token: string
     user: AuthUser
     loading: boolean
+}
+
+export type RequestResetPasswordDto = {
+    email: string
+}
+
+export type ResetPasswordDto = {
+    token: string
+    password: string
 }
 
 export const useAuthStore = defineStore({
@@ -45,7 +82,7 @@ export const useAuthStore = defineStore({
         },
     },
     actions: {
-        async login(formData: LoginRequestBody) {
+        async login(formData: LoginRequestDto) {
             const data = await useApiPost<LoginResponse>('/auth/login', {
                 body: formData,
             })
@@ -107,7 +144,7 @@ export const useAuthStore = defineStore({
             this.loading = false
         },
 
-        async register(formData: RegisterRequestBody) {
+        async register(formData: RegisterRequestDto) {
             const data = await useApiPost<RegisterResponse>('/auth/register', {
                 body: formData,
             })
@@ -123,6 +160,18 @@ export const useAuthStore = defineStore({
             const payload = jwtDecode<AuthPayload>(data.accessToken)
             this.user = payload
             location.reload()
+        },
+
+        async sendRequestResetPassword(dto: RequestResetPasswordDto) {
+            await useApiPost('/auth/request-reset-password', {
+                body: dto,
+            })
+        },
+
+        async resetPassword(dto: ResetPasswordDto) {
+            await useApiPost('/auth/reset-password', {
+                body: dto,
+            })
         },
 
         logout() {
