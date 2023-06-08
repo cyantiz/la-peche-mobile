@@ -189,7 +189,7 @@ const isDraggingToDislike = computed(() => {
     <ClientOnly>
         <div
             ref="cardRef"
-            class="__info recommendation-card absolute mx-auto flex w-full max-w-[480px] cursor-pointer select-none flex-col items-center gap-4 overflow-scroll rounded-xl bg-white p-4 md:w-[420px] md:overflow-auto"
+            class="__info recommendation-card absolute mx-auto flex w-full max-w-[90%] cursor-pointer select-none flex-col items-center gap-4 overflow-scroll rounded-xl bg-white p-4 sm:max-w-[480px] md:w-[420px] md:overflow-auto"
             :style="{ '--index': index, ...style }"
             @drag="(e) => e.preventDefault()"
             @mousedown="handleCardMouseDown"

@@ -65,6 +65,21 @@ declare global {
         images: IImage[]
     }
 
+    type INotification = {
+        id: number
+        text: string
+        status: NotificationStatus
+        createdAt: Date
+        updatedAt: Date
+        userId: number
+    }
+
+    enum NotificationStatus {
+        READ = 'READ',
+        UNREAD = 'UNREAD',
+        PINNED = 'PINNED',
+    }
+
     interface IAreaProvince {
         code: string
         name: string
@@ -81,5 +96,12 @@ declare global {
         name: string
         district: string
         province: string
+    }
+
+    interface IPagination {
+        page: number
+        pageSize: number
+        total: number
+        totalPages: number
     }
 }

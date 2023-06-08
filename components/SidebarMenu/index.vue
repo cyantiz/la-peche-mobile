@@ -8,6 +8,7 @@ import {
     PhUser,
 } from 'phosphor-vue'
 import { useAuthStore } from '~/store/auth'
+import { useProfileStore } from '~/store/profile'
 
 withDefaults(
     defineProps<{
@@ -21,6 +22,7 @@ withDefaults(
 const router = useRouter()
 
 const auth = useAuthStore()
+const profile = useProfileStore()
 
 const menuOptions: MenuOption[] = [
     {
@@ -83,7 +85,10 @@ function expandIcon() {
         >
             <div class="info flex w-full flex-col items-center gap-3">
                 <div class="flex overflow-hidden rounded-lg">
-                    <Avatar :size="collapsed ? 40 : 192" />
+                    <Avatar
+                        :src="profile.myAvatar?.url"
+                        :size="collapsed ? 40 : 192"
+                    />
                 </div>
                 <div v-if="!collapsed" class="text">
                     <div class="w-48 text-lg font-bold">

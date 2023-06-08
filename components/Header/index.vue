@@ -8,9 +8,11 @@ import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import Navbar from './Navbar/index.vue'
 import ThemeOptionMenu from './HeaderItemMenu/ThemeOptionMenu.vue'
 import NotificationMenu from './HeaderItemMenu/NotificationMenu.vue'
+import { useProfileStore } from '~/store/profile'
 
 const breakPoints = useBreakpoints(breakpointsTailwind)
 const isMobile = breakPoints.smallerOrEqual('md')
+const profile = useProfileStore()
 </script>
 
 <template>
@@ -22,7 +24,6 @@ const isMobile = breakPoints.smallerOrEqual('md')
         >
             <div class="flex h-full w-full justify-between">
                 <Logo size="sm" is-with-text />
-
                 <div v-if="!isMobile" class="header-right--desktop flex gap-9">
                     <div class="flex items-center gap-4">
                         <HeaderItemTriggerMenuButton size="small">
@@ -48,7 +49,10 @@ const isMobile = breakPoints.smallerOrEqual('md')
                         <HeaderItemTriggerMenuButton>
                             <template #button>
                                 <div class="flex overflow-hidden">
-                                    <Avatar :size="40" />
+                                    <Avatar
+                                        :src="profile.myAvatar?.url"
+                                        :size="40"
+                                    />
                                 </div>
                             </template>
                             <template #menu>

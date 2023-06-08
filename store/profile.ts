@@ -34,12 +34,25 @@ export interface ChangeImageOrderDTO {
     newOrder: number
 }
 
-interface IProfileStoreState {}
+interface IProfileStoreState {
+    myInformationWithImages: IUserInformationWithImages | null
+    myAvatar: IImage | null
+}
 
 export const useProfileStore = defineStore({
     id: 'profile',
-    state: () => ({} as IProfileStoreState),
+    state: () =>
+        ({
+            myInformationWithImages: null,
+            myAvatar: null,
+        } as IProfileStoreState),
     actions: {
+        async init(username: string) {
+            const myProfile = await this.getProfile(username)
+            this.myInformationWithImages = myProfile
+            this.myAvatar =
+                myProfile.images.find((image) => image.order === 1) ?? null
+        },
         getProfile(username: string) {
             return useApiGet<IUserInformationWithImages>(
                 `/users/info-with-images/${username}`

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NButton } from 'naive-ui'
-import { PhSignOut } from 'phosphor-vue'
+import { PhSignOut, PhUser } from 'phosphor-vue'
 import { useAuthStore } from '~/store/auth'
 
 const auth = useAuthStore()
@@ -22,8 +22,14 @@ const logout = async () => {
             {{ auth.user.name }}
         </div>
         <div class="text-base">@{{ auth.user.username }}</div>
-        <div class="w-full cursor-pointer">
-            <NButton class="mt-4" block :loading="pending" @click="logout">
+        <div class="mt-4 flex w-full cursor-pointer flex-col gap-1">
+            <NButton block @click="$router.push('/profile')">
+                <template #icon>
+                    <PhUser weight="fill" />
+                </template>
+                My profile
+            </NButton>
+            <NButton block :loading="pending" @click="logout">
                 <template #icon>
                     <PhSignOut weight="fill" />
                 </template>
