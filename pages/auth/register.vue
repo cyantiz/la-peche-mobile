@@ -10,8 +10,7 @@ import {
     FormInst,
     useNotification,
 } from 'naive-ui'
-import { RegisterRequestBody } from '@/types/api/auth'
-import { useAuthStore } from '~/store/auth'
+import { useAuthStore, RegisterRequestDto } from '~/store/auth'
 import { registerFormRules } from '@/utils/validators/auth'
 import { useUIStore } from '~/store/ui'
 
@@ -23,19 +22,17 @@ useHead({
 })
 
 const formRef = ref<FormInst | null>(null)
-
-const form = reactive<RegisterRequestBody>({
+const form = reactive<RegisterRequestDto>({
     email: '',
     name: '',
     username: '',
     password: '',
 })
-
 const pending = ref<boolean>(false)
 
 const { register } = useAuthStore()
-
 const { setNotificationPlacement } = useUIStore()
+
 const loadingBar = useLoadingBar()
 const dialog = useDialog()
 const notification = useNotification()
