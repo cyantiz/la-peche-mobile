@@ -38,7 +38,6 @@ const pending = ref<boolean>(false)
 const { resetPassword } = useAuthStore()
 const { setNotificationPlacement } = useUIStore()
 
-const router = useRouter()
 const loadingBar = useLoadingBar()
 const dialog = useDialog()
 const notification = useNotification()

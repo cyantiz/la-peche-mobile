@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum Income {
     LessThan500 = '$0 - $500',
     Between500And1000 = '$500 - $1000',
