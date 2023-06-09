@@ -99,7 +99,6 @@ const handleDelete = async () => {
         >
             <PhUpload :size="24" weight="bold" />
         </label>
-        <!-- accept one file image only -->
         <input
             :id="'image-upload' + '' + randomId"
             type="file"

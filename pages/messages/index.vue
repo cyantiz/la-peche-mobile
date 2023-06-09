@@ -1,3 +1,4 @@
+<!-- eslint-disable camelcase -->
 <script setup lang="ts">
 import { arrayUnion, Timestamp } from '@firebase/firestore'
 import { useLoadingBar } from 'naive-ui'
@@ -33,9 +34,25 @@ onMounted(() => {
 })
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-const sendMsg = (msg: string) => {
+const sendMsgText = (msg: string) => {
+    if (!msg || !msg?.length) return
+
     const message = {
         text: msg,
+        sender: auth.user.id,
+        createdAt: Timestamp.now(),
+    }
+
+    const docRef = fireStore.doc('chats', currentChatId.value)
+
+    fireStore.updateDoc(docRef, {
+        messages: arrayUnion(message),
+    })
+}
+
+const sendMsgImage = (url: string) => {
+    const message = {
+        text: `[image](${url})`,
         sender: auth.user.id,
         createdAt: Timestamp.now(),
     }
@@ -71,7 +88,10 @@ watch(
 
 <template>
     <ClientOnly>
-        <div v-if="!userChats">loading</div>
+        <div v-if="!userChats" class="flex h-full">
+            <SkeletonChatList />
+            <div class="h-full w-0.5 bg-gray-200"></div>
+        </div>
         <div v-else class="flex h-full gap-2">
             <ChatList
                 :user-chats="userChats"
@@ -88,7 +108,8 @@ watch(
                     v-if="currentChatMessages"
                     :chat-user-info="userChats[currentChatId].userInfo"
                     :messages="currentChatMessages?.messages"
-                    @submit-message="sendMsg"
+                    @submit-message-text="sendMsgText"
+                    @submit-message-image="sendMsgImage"
                 />
                 <div
                     v-else

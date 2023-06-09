@@ -37,7 +37,7 @@ withDefaults(
                 width: randomWidthPercent(20, 40),
             }"
         >
-            <NSkeleton round width="100%" height="38.4px" />
+            <NSkeleton class="rounded-lg" width="100%" height="38.4px" />
         </div>
     </div>
 </template>

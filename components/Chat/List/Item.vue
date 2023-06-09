@@ -22,7 +22,7 @@ defineEmits(['select'])
             "
             @click="$emit('select')"
         >
-            <Avatar :src="userInfo.avatar" :size="48" :circle="true" />
+            <Avatar :src="userInfo.avatar" :size="48" />
             <div
                 class="overflow:hidden flex h-0 w-0 flex-1 opacity-0 transition-all duration-200 lg:h-auto lg:w-auto lg:opacity-100"
             >

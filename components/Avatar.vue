@@ -18,6 +18,7 @@ const src = computed(() => {
         :src="src"
         :size="props.size"
         :circle="props.circle"
+        :round="props.round"
         class="cursor-pointer"
         object-fit="cover"
     />

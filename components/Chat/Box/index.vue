@@ -6,16 +6,23 @@ defineProps<{
     messages: IMessage[]
     chatUserInfo: IChatUserInfo
 }>()
-defineEmits(['submit-message'])
+defineEmits(['submit-message-text', 'submit-message-image'])
 
 const auth = useAuthStore()
 </script>
 
 <template>
     <div class="flex h-full w-full flex-col justify-between gap-2">
-        <div v-if="chatUserInfo" class="flex items-center gap-2">
+        <div v-if="chatUserInfo" class="flex items-center gap-4">
             <Avatar :src="chatUserInfo.avatar" :size="48" />
-            <p>{{ chatUserInfo.name }}</p>
+            <div class="flex-1 pb-1">
+                <p
+                    class="overflow-hidden text-ellipsis whitespace-nowrap text-base font-bold"
+                >
+                    {{ chatUserInfo.name }}
+                </p>
+                <p class="text-xs">@{{ chatUserInfo.username }}</p>
+            </div>
         </div>
         <div
             v-if="!messages.length"
@@ -23,7 +30,7 @@ const auth = useAuthStore()
         >
             <NResult status="404" title="No messages yet" />
         </div>
-        <div v-else class="h-full w-full overflow-y-auto">
+        <div v-else class="h-full w-full overflow-y-auto pr-2 md:pr-0">
             <ChatBoxMessage
                 v-for="message in messages"
                 :key="message.createdAt.seconds"
@@ -32,7 +39,10 @@ const auth = useAuthStore()
             >
             </ChatBoxMessage>
         </div>
-        <ChatMessageInput @submit-message="$emit('submit-message', $event)" />
+        <ChatMessageInput
+            @submit-message-text="$emit('submit-message-text', $event)"
+            @submit-message-image="$emit('submit-message-image', $event)"
+        />
     </div>
 </template>
 
