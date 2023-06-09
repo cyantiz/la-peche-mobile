@@ -22,15 +22,13 @@ useHead({
 })
 
 const token = useRoute().query.token as string
-
 if (!token) {
     location.href = '/auth/login'
 }
-
 const formRef = ref<FormInst | null>(null)
 const form = reactive<ResetPasswordDto>({
     password: '',
-    token: '',
+    token,
 })
 
 const pending = ref<boolean>(false)
@@ -54,6 +52,7 @@ async function handleResetPassword() {
             title: 'Success!',
             content: 'Rest password successfully.',
             positiveText: 'Okay',
+            onClose: () => (location.href = '/auth/login'),
             onPositiveClick: () => (location.href = '/auth/login'),
         })
     } catch (error: any) {
@@ -62,7 +61,6 @@ async function handleResetPassword() {
             title: 'Failed!',
             content: 'Failed to reset password, please try again later.',
             positiveText: 'Okay',
-            onPositiveClick: () => (location.href = '/auth/login'),
         })
     } finally {
         pending.value = false
