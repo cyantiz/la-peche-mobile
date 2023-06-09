@@ -24,7 +24,7 @@ const image = computed<string | null>(() => {
         </div>
         <div
             v-else
-            class="my-0.5 rounded-lg p-2"
+            class="my-0.5 rounded-full px-4 py-2"
             :class="self ? 'bg-theme text-white' : 'bg-[#E4E6EB] text-black'"
         >
             {{ text }}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { arrayUnion, Timestamp } from '@firebase/firestore'
 import { useLoadingBar } from 'naive-ui'
 import { useAuthStore } from '~/store/auth'
 
@@ -22,7 +23,6 @@ onMounted(() => {
     const unsubscribe = fireStore.onSnapShot<Record<string, IUserChat>>(
         docRef,
         (doc) => {
-            console.log(doc.data())
             userChats.value = doc.data()
         }
     )
@@ -34,25 +34,34 @@ onMounted(() => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const sendMsg = (msg: string) => {
-    // send msg
+    const message = {
+        text: msg,
+        sender: auth.user.id,
+        createdAt: Timestamp.now(),
+    }
+
+    const docRef = fireStore.doc('chats', currentChatId.value)
+
+    fireStore.updateDoc(docRef, {
+        messages: arrayUnion(message),
+    })
 }
 
 let unsubscribeChat = () => {}
 
 watch(
     () => currentChatId.value,
-    (newVal) => {
+    async (newVal) => {
         loadingMessages.value = true
-        console.log(loadingMessages.value)
         if (!userChats.value) return
         if (unsubscribeChat) unsubscribeChat()
+
+        await useDelay(500)
 
         unsubscribeChat = fireStore.onSnapShot<IChat>(
             userChats.value[newVal].messages,
             (doc) => {
                 loadingMessages.value = false
-                console.log(loadingMessages.value)
-                console.log('Current messages: ', doc.data())
                 currentChatMessages.value = doc.data()
             }
         )
@@ -70,18 +79,24 @@ watch(
                 @select-chat="currentChatId = $event"
             />
             <div class="h-full w-0.5 bg-gray-200"></div>
-            <ChatBox
-                v-if="currentChatMessages"
-                :pending="loadingMessages"
-                :chat-user-info="userChats[currentChatId].userInfo"
-                :messages="currentChatMessages?.messages"
-            />
-            <div
-                v-else
-                class="flex h-full w-full items-center justify-center text-lg font-bold text-inactive"
-            >
-                Select a chat or start a new conversation
-            </div>
+            <template v-if="loadingMessages">
+                <SkeletonChatBox />
+            </template>
+
+            <template v-else>
+                <ChatBox
+                    v-if="currentChatMessages"
+                    :chat-user-info="userChats[currentChatId].userInfo"
+                    :messages="currentChatMessages?.messages"
+                    @submit-message="sendMsg"
+                />
+                <div
+                    v-else
+                    class="flex h-full w-full items-center justify-center text-lg font-bold text-inactive"
+                >
+                    Select a chat or start a new conversation
+                </div>
+            </template>
         </div>
     </ClientOnly>
 </template>

@@ -10,7 +10,8 @@ import {
     DocumentReference,
     FirestoreError,
     DocumentSnapshot,
-    serverTimestamp as _serverTimestamp,
+    updateDoc as _updateDoc,
+    UpdateData,
 } from 'firebase/firestore'
 export default function useFirestore() {
     const { $firestore } = useNuxtApp() as unknown as { $firestore: Firestore }
@@ -49,8 +50,11 @@ export default function useFirestore() {
         return _onSnapShot(reference, onNext, onError, onCompletion)
     }
 
-    const serverTimestamp = () => {
-        return _serverTimestamp()
+    const updateDoc = <T>(
+        reference: DocumentReference<T>,
+        data: UpdateData<T>
+    ): Promise<void> => {
+        return _updateDoc(reference, data)
     }
 
     return {
@@ -59,7 +63,7 @@ export default function useFirestore() {
         setDoc,
         collection,
         getDoc,
+        updateDoc,
         onSnapShot,
-        serverTimestamp,
     }
 }

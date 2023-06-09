@@ -8,7 +8,7 @@ defineEmits(['select-chat'])
 
 <template>
     <div class="flex flex-col gap-1">
-        <div class="text-lg font-bold">Messages</div>
+        <div class="hidden text-lg font-bold lg:block">Messages</div>
         <ChatListItem
             v-for="(chat, chatId) in userChats"
             :key="chatId"

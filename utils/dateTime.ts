@@ -25,13 +25,7 @@ export function getDateFormalString(date: Date) {
             minute: '2-digit',
         })
     else if (date.toDateString() === yesterday.toDateString())
-        return (
-            'Yesterday ' +
-            date.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-            })
-        )
+        return 'Yesterday'
     else if (date > lastWeek)
         return date.toLocaleDateString('en-US', { weekday: 'long' })
     else if (date > lastMonth)

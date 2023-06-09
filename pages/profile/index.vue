@@ -20,16 +20,12 @@ const { data, pending, error } = await useAsyncData<IUserInformationWithImages>(
 const handlePartialUpdateLocalData = (
     newData: Partial<IUserInformationWithImages>
 ) => {
-    console.log('handle partial update local data')
     if (!localData.value) return
 
-    console.log('update local data')
     localData.value = {
         ...localData.value,
         ...newData,
     }
-
-    console.log('local data', localData.value)
 }
 
 const isShowPreview = ref(false)

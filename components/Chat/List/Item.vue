@@ -24,10 +24,12 @@ defineEmits(['select'])
         >
             <Avatar :src="userInfo.avatar" :size="48" :circle="true" />
             <div
-                class="lg:opacity-200 flex w-0 flex-1 opacity-0 transition-all duration-200 lg:w-auto lg:opacity-100"
+                class="overflow:hidden flex h-0 w-0 flex-1 opacity-0 transition-all duration-200 lg:h-auto lg:w-auto lg:opacity-100"
             >
                 <div class="flex-1 pb-1">
-                    <p class="text-base font-bold">
+                    <p
+                        class="overflow-hidden text-ellipsis whitespace-nowrap text-base font-bold"
+                    >
                         {{ userInfo.name }}
                     </p>
                     <p class="text-xs">@{{ userInfo.username }}</p>

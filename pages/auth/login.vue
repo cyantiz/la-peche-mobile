@@ -74,7 +74,7 @@ function submitForm(e: Event) {
 }
 
 function loginWithGoogle() {
-    // console.log('Login with Google')
+    //
 }
 
 onMounted(() => {

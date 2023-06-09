@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import { NSpin, NResult } from 'naive-ui'
+import { NResult } from 'naive-ui'
 import { useAuthStore } from '~/store/auth'
 
 defineProps<{
     messages: IMessage[]
     chatUserInfo: IChatUserInfo
-    pending: boolean
 }>()
+defineEmits(['submit-message'])
 
 const auth = useAuthStore()
 </script>
 
 <template>
-    <div v-if="pending" class="flex h-full w-full items-center justify-center">
-        <NSpin />
-    </div>
-    <div v-else class="flex h-full w-full flex-col justify-between gap-2">
+    <div class="flex h-full w-full flex-col justify-between gap-2">
         <div v-if="chatUserInfo" class="flex items-center gap-2">
             <Avatar :src="chatUserInfo.avatar" :size="48" />
             <p>{{ chatUserInfo.name }}</p>
@@ -26,7 +23,7 @@ const auth = useAuthStore()
         >
             <NResult status="404" title="No messages yet" />
         </div>
-        <div class="h-full w-full overflow-y-auto">
+        <div v-else class="h-full w-full overflow-y-auto">
             <ChatBoxMessage
                 v-for="message in messages"
                 :key="message.createdAt.seconds"
@@ -35,7 +32,7 @@ const auth = useAuthStore()
             >
             </ChatBoxMessage>
         </div>
-        <ChatMessageInput />
+        <ChatMessageInput @submit-message="$emit('submit-message', $event)" />
     </div>
 </template>
 
