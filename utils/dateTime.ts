@@ -20,13 +20,10 @@ export function getDateFormalString(date: Date) {
     lastDecade.setFullYear(lastDecade.getFullYear() - 10)
 
     if (date.toDateString() === today.toDateString())
-        return (
-            'Today ' +
-            date.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-            })
-        )
+        return date.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+        })
     else if (date.toDateString() === yesterday.toDateString())
         return (
             'Yesterday ' +

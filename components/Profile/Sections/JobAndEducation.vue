@@ -98,12 +98,12 @@ const universityOptions = computed(() => {
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSectionTable
+    <ProfileSectionsBaseProfileSectionTable
         title="Job and Education"
         :information-records="informationRecords"
     >
         <template #modal="{ title, closeModal, showModal }">
-            <PageOrgProfileSectionsBaseModalDialog
+            <ProfileSectionsBaseModalDialog
                 class="job-and-education-modal"
                 :loading="pending"
                 :title="title"
@@ -169,9 +169,9 @@ const universityOptions = computed(() => {
                         </NInputNumber>
                     </NFormItem>
                 </NForm>
-            </PageOrgProfileSectionsBaseModalDialog>
+            </ProfileSectionsBaseModalDialog>
         </template>
-    </PageOrgProfileSectionsBaseProfileSectionTable>
+    </ProfileSectionsBaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>

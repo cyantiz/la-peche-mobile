@@ -1,3 +1,4 @@
+import { DocumentData, DocumentReference } from 'firebase/firestore'
 import { Role } from './enums/Role'
 
 declare global {
@@ -103,5 +104,32 @@ declare global {
         pageSize: number
         total: number
         totalPages: number
+    }
+
+    interface IChatUserInfo {
+        id: number
+        avatar: string
+        username: string
+        name: string
+    }
+
+    interface IFirebaseTimestamp {
+        nanoseconds: number
+        seconds: number
+    }
+    interface IUserChat {
+        date: IFirebaseTimestamp
+        userInfo: IChatUserInfo
+        messages: DocumentReference<IChat>
+    }
+
+    interface IMessage {
+        createdAt: IFirebaseTimestamp
+        sender: number
+        text: string
+    }
+
+    interface IChat {
+        messages: IMessage[]
     }
 }

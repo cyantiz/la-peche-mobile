@@ -67,15 +67,15 @@ onMounted(() => {
             class="profile-sections flex w-full flex-col justify-between gap-4 pb-16 xl:flex-row"
         >
             <div class="flex w-full flex-col items-center gap-4">
-                <PageOrgProfileSectionsBiographic
+                <ProfileSectionsBiographic
                     :biographic="localData.biographic"
                     @update="handlePartialUpdateLocalData"
                 />
-                <PageOrgProfileSectionsImages :images="localData.images" />
+                <ProfileSectionsImages :images="localData.images" />
             </div>
 
             <div class="flex w-full flex-col items-center gap-4">
-                <PageOrgProfileSectionsBasic
+                <ProfileSectionsBasic
                     :name="localData.name"
                     :gender="localData.gender"
                     :year-of-birth="localData.yearOfBirth"
@@ -85,20 +85,20 @@ onMounted(() => {
                     @update="handlePartialUpdateLocalData"
                 />
 
-                <PageOrgProfileSectionsRelationshipGoal
+                <ProfileSectionsRelationshipGoal
                     :orientation="localData.orientation"
                     :relationship-goal="'Long-term partner'"
                     @update="handlePartialUpdateLocalData"
                 />
 
-                <PageOrgProfileSectionsJobAndEducation
+                <ProfileSectionsJobAndEducation
                     :job="localData.job"
                     :education="localData.education"
                     :income="localData.income"
                     @update="handlePartialUpdateLocalData"
                 />
 
-                <PageOrgProfileSectionsAdditionalInfo
+                <ProfileSectionsAdditionalInfo
                     :speaks="localData.speaks"
                     :offspring="localData.offspring"
                     :pets="localData.pets"

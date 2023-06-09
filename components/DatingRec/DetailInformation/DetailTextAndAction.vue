@@ -64,7 +64,7 @@ const age = computed(() => {
             <div class="info__basic">
                 <div class="mb-2 text-lg font-bold">Basic</div>
                 <div class="items flex flex-wrap gap-2">
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.height"
                         :icon="PhRuler"
                         :text="info?.height + ' cm'"
@@ -74,12 +74,12 @@ const age = computed(() => {
             <div class="info__relationship">
                 <div class="mb-2 text-lg font-bold">Relationship Expected</div>
                 <div class="items flex flex-wrap gap-2">
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.orientation"
                         :icon="PhUserFocus"
                         :text="info?.orientation"
                     />
-                    <!-- <PageOrgDatingRecDetailInformationTag
+                    <!-- <DatingRecDetailInformationTag
                                         v-show="info?.relationshipGoal"
                                         :icon="PhEye"
                                         :text="info?.relationshipGoal"
@@ -89,42 +89,42 @@ const age = computed(() => {
             <div class="info__additional">
                 <div class="mb-2 text-lg font-bold">Additional</div>
                 <div class="items flex flex-wrap gap-2">
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.speaks"
                         :icon="PhTranslate"
                         :text="info?.speaks"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.offspring"
                         :icon="PhBaby"
                         :text="info?.offspring"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.pets"
                         :icon="PhDog"
                         :text="info?.pets"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.sign"
                         :icon="PhMoonStars"
                         :text="info?.sign"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.drugs"
                         :icon="PhLeaf"
                         :text="info?.drugs"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.smokes"
                         :icon="PhFireSimple"
                         :text="info?.smokes"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.diet"
                         :icon="PhForkKnife"
                         :text="info?.diet"
                     />
-                    <PageOrgDatingRecDetailInformationTag
+                    <DatingRecDetailInformationTag
                         v-show="info?.drinks"
                         :icon="PhMartini"
                         :text="info?.drinks"
@@ -135,10 +135,10 @@ const age = computed(() => {
         <div
             class="actions absolute bottom-3 right-0 flex w-full justify-center gap-8 lg:bottom-0 lg:mb-0"
         >
-            <PageOrgDatingRecActionButton type="star" :shadow="false" />
+            <DatingRecActionButton type="star" :shadow="false" />
             <div class="flex gap-6">
-                <PageOrgDatingRecActionButton type="dislike" :shadow="false" />
-                <PageOrgDatingRecActionButton type="like" :shadow="false" />
+                <DatingRecActionButton type="dislike" :shadow="false" />
+                <DatingRecActionButton type="like" :shadow="false" />
             </div>
         </div>
     </div>

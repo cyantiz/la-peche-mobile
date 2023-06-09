@@ -34,20 +34,17 @@ const sm = breakPoints.smallerOrEqual('sm')
             @close="$emit('close')"
         >
             <div class="flex h-full flex-col gap-8 overflow-y-auto lg:flex-row">
-                <PageOrgDatingRecDetailImageSkeleton v-show="!images" />
+                <SkeletonDatingRecDetailImage v-show="!images" />
 
-                <PageOrgDatingRecDetailImage
+                <DatingRecDetailImage
                     v-if="images"
                     :images="images"
                     :slides-per-view="sm ? 1 : lg ? 2 : 1"
                 />
 
                 <ClientOnly>
-                    <PageOrgDatingRecDetailTextSkeleton v-show="!info" />
-                    <PageOrgDatingRecDetailTextAndAction
-                        v-if="info"
-                        :info="info"
-                    />
+                    <SkeletonDatingRecDetailText v-show="!info" />
+                    <DatingRecDetailTextAndAction v-if="info" :info="info" />
                 </ClientOnly>
             </div>
         </NCard>

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 export enum Diet {
     Vegan = 'Vegan',
     Vegetarian = 'Vegetarian',

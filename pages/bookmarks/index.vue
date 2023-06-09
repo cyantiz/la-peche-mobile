@@ -74,7 +74,7 @@ onMounted(async () => {
                 v-else-if="bookmarkeds.length"
                 class="flex w-full flex-wrap justify-center"
             >
-                <PageOrgDatingRecSuggestionCardNoActionVersion
+                <DatingRecSuggestionCardNoActionVersion
                     v-for="bookmarked in bookmarkeds"
                     :key="bookmarked.id"
                     :index="1"

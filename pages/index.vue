@@ -41,7 +41,7 @@ const openDetail = (_infoWithImages: IUserInformationWithImages) => {
             class="absolute aspect-square h-full rounded-full bg-bitter-sweet text-bitter-sweet opacity-20 blur-xl"
         />
         <template v-if="recommendations">
-            <PageOrgDatingRecSuggestionCard
+            <DatingRecSuggestionCard
                 v-for="(recommendation, index) in recommendations"
                 :key="recommendation.id"
                 :index="recommendations.length - index - 1"
@@ -50,7 +50,7 @@ const openDetail = (_infoWithImages: IUserInformationWithImages) => {
             />
         </template>
     </div>
-    <PageOrgDatingRecDetailInformation
+    <DatingRecDetailInformation
         :info="detailInfo"
         :images="detailImages"
         :show="showDetail"

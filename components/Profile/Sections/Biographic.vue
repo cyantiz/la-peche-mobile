@@ -45,7 +45,7 @@ const updateBiographic = async (closeModal: () => void) => {
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSection block title="Biographic">
+    <ProfileSectionsBaseProfileSection block title="Biographic">
         <template #content>
             <p
                 v-if="biographic"
@@ -58,7 +58,7 @@ const updateBiographic = async (closeModal: () => void) => {
             </p>
         </template>
         <template #modal="{ title, closeModal, showModal }">
-            <PageOrgProfileSectionsBaseModalDialog
+            <ProfileSectionsBaseModalDialog
                 :loading="pending ?? false"
                 :title="title"
                 :show="showModal"
@@ -71,9 +71,9 @@ const updateBiographic = async (closeModal: () => void) => {
                     type="textarea"
                     placeholder="Basic Textarea"
                 />
-            </PageOrgProfileSectionsBaseModalDialog>
+            </ProfileSectionsBaseModalDialog>
         </template>
-    </PageOrgProfileSectionsBaseProfileSection>
+    </ProfileSectionsBaseProfileSection>
 </template>
 
 <style lang="less" scoped></style>

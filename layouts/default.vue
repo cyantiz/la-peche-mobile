@@ -72,7 +72,7 @@ router.beforeEach(() => {
 
 <style lang="less" scoped>
 @navbar-height-desktop: 64px;
-@navbar-height-mobile: 108px;
+@navbar-height-mobile: 96px;
 @breakpoint-mobile: 768px;
 div.body {
     height: calc(100vh - @navbar-height-desktop);

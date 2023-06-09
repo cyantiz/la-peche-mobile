@@ -24,7 +24,7 @@ const age = computed(() => {
         >
             <div class="relative flex md:w-full">
                 <div class="__info__images flex md:w-full">
-                    <PageOrgDatingRecImageCarousel
+                    <DatingRecImageCarousel
                         :images="infoWithImages.images"
                         :slides-per-view="1"
                         :preview-disabled="true"

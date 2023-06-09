@@ -12,7 +12,7 @@ withDefaults(
 
 <template>
     <div class="mx-auto flex w-[calc(100vw-32px)] lg:h-full lg:w-96">
-        <PageOrgDatingRecImageCarousel
+        <DatingRecImageCarousel
             :images="images"
             :slides-per-view="slidesPerView"
         />

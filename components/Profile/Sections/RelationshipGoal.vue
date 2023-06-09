@@ -91,12 +91,12 @@ const RelationShipGoalIcon = {
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSectionTable
+    <ProfileSectionsBaseProfileSectionTable
         title="Relationship goals"
         :information-records="informationRecords"
     >
         <template #modal="{ title, closeModal, showModal }">
-            <PageOrgProfileSectionsBaseModalDialog
+            <ProfileSectionsBaseModalDialog
                 :loading="pending"
                 :title="title"
                 :show="showModal"
@@ -125,9 +125,9 @@ const RelationShipGoalIcon = {
                         @select="patchingRelationshipGoal = option"
                     />
                 </div>
-            </PageOrgProfileSectionsBaseModalDialog>
+            </ProfileSectionsBaseModalDialog>
         </template>
-    </PageOrgProfileSectionsBaseProfileSectionTable>
+    </ProfileSectionsBaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>

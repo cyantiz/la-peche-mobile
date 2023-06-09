@@ -77,7 +77,7 @@ const changeOrder = (event: {
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSection
+    <ProfileSectionsBaseProfileSection
         block
         title="Images"
         :have-edit-modal="false"
@@ -127,7 +127,7 @@ const changeOrder = (event: {
                 </ClientOnly>
             </VueDraggableNext>
         </template>
-    </PageOrgProfileSectionsBaseProfileSection>
+    </ProfileSectionsBaseProfileSection>
 </template>
 
 <style lang="less" scoped></style>

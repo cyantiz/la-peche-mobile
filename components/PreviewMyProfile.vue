@@ -25,14 +25,14 @@ defineEmits(['close'])
             <div class="absolute right-5 top-5">
                 <CloseButton @click="$emit('close')" />
             </div>
-            <PageOrgDatingRecSuggestionCard
+            <DatingRecSuggestionCard
                 :info-with-images="infoWithImages"
                 :index="0"
                 @dismiss="$emit('close')"
                 @show-detail-btn-click="showDetail = true"
             />
         </div>
-        <PageOrgDatingRecDetailInformation
+        <DatingRecDetailInformation
             :info="infoWithImages"
             :images="infoWithImages.images"
             :show="showDetail"

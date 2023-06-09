@@ -188,12 +188,12 @@ const updateBasicInfo = async (closeModal: () => void) => {
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSectionTable
+    <ProfileSectionsBaseProfileSectionTable
         title="Basic information"
         :information-records="informationRecords"
     >
         <template #modal="{ title, closeModal, showModal }">
-            <PageOrgProfileSectionsBaseModalDialog
+            <ProfileSectionsBaseModalDialog
                 :loading="pending"
                 :title="title"
                 :show="showModal"
@@ -334,9 +334,9 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         />
                     </NFormItem>
                 </NForm>
-            </PageOrgProfileSectionsBaseModalDialog>
+            </ProfileSectionsBaseModalDialog>
         </template>
-    </PageOrgProfileSectionsBaseProfileSectionTable>
+    </ProfileSectionsBaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>

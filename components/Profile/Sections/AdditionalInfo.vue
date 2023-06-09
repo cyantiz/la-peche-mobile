@@ -120,12 +120,12 @@ const offspringOptions = array2NaiveOptions(Object.values(Offspring))
 </script>
 
 <template>
-    <PageOrgProfileSectionsBaseProfileSectionTable
+    <ProfileSectionsBaseProfileSectionTable
         title="Additional information"
         :information-records="informationRecords"
     >
         <template #modal="{ title, closeModal, showModal }">
-            <PageOrgProfileSectionsBaseModalDialog
+            <ProfileSectionsBaseModalDialog
                 :loading="pending"
                 :title="title"
                 :show="showModal"
@@ -263,9 +263,9 @@ const offspringOptions = array2NaiveOptions(Object.values(Offspring))
                         />
                     </NFormItem>
                 </NForm>
-            </PageOrgProfileSectionsBaseModalDialog>
+            </ProfileSectionsBaseModalDialog>
         </template>
-    </PageOrgProfileSectionsBaseProfileSectionTable>
+    </ProfileSectionsBaseProfileSectionTable>
 </template>
 
 <style lang="less" scoped></style>
