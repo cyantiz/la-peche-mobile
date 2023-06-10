@@ -7,7 +7,6 @@
         "dev": "ENV=dev nuxt dev --port 1203",
         "generate": "env=dev nuxt generate",
         "preview": "nuxt preview",
-        // "postinstall": "nuxt prepare",
         "lint": "eslint . --ext .ts,.vue",
         "format": "prettier --write .",
         "start": "nuxt start"
