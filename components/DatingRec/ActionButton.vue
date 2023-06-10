@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { PhHeart, PhX, PhStar } from 'phosphor-vue'
+import { PhHeart, PhX, PhStar, PhChatCenteredDots } from 'phosphor-vue'
 
 withDefaults(
     defineProps<{
-        type: 'like' | 'dislike' | 'star'
+        type: 'like' | 'dislike' | 'star' | 'message'
         shadow?: boolean
     }>(),
     {
@@ -46,6 +46,19 @@ defineEmits(['buttonClick', 'buttonMouseDown'])
             :class="{ _shadow: shadow }"
         />
     </div>
+    <div
+        v-if="type === 'message'"
+        class="cursor-pointer rounded-full p-3 leading-[0] text-green-apple transition-all duration-200 hover:-translate-y-0.5 hover:bg-green-apple hover:text-white"
+        @click="$emit('buttonClick')"
+        @mousedown="$emit('buttonMouseDown')"
+    >
+        <PhChatCenteredDots
+            size="24"
+            weight="fill"
+            class="message-btn"
+            :class="{ _shadow: shadow }"
+        />
+    </div>
 </template>
 
 <style lang="less" scoped>
@@ -55,7 +68,8 @@ defineEmits(['buttonClick', 'buttonMouseDown'])
 .dislike-btn._shadow {
     box-shadow: -3px 3px 20px rgba(221, 185, 103, 0.4);
 }
-.star-btn._shadow {
+.star-btn._shadow,
+.message-btn.shadow {
     filter: drop-shadow(-3px 3px 20px rgba(24, 160, 88, 0.4));
 }
 </style>

@@ -78,7 +78,7 @@ onMounted(async () => {
                 v-else-if="matcheds.length"
                 class="flex h-full w-full flex-wrap justify-center"
             >
-                <DatingRecSuggestionCardNoActionVersion
+                <DatingRecSuggestionCardWithMessage
                     v-for="match in matcheds"
                     :key="match.id"
                     :index="1"

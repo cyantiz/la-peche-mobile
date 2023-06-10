@@ -20,7 +20,7 @@ const image = computed<string | null>(() => {
         :style="{ justifyContent: self ? 'flex-end' : 'flex-start' }"
     >
         <div v-if="image" class="message-image-wrapper w-96">
-            <NImage :src="image" width="100%" />
+            <NImage :src="image" style="width: 100%" />
         </div>
         <div
             v-else
