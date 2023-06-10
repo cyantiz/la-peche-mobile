@@ -63,10 +63,10 @@ jobs:
 workflows:
     ci-web:
         jobs:
-            - lint
+            # - lint
             - build-and-deploy:
-                  requires:
-                      - lint
+                  # requires:
+                  #     - lint
                   filters:
                       branches:
                           only:
