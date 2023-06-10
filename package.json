@@ -3,14 +3,14 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "build": "ENV=dev npx nuxt build",
-        "dev": "ENV=dev npx nuxt dev --port 1203",
-        "generate": "env=dev npx nuxt generate",
-        "preview": "npx nuxt preview",
-        "postinstall": "npx nuxt prepare",
-        "lint": "npx eslint . --ext .ts,.vue",
-        "format": "npx prettier --write .",
-        "start": "npx nuxt start"
+        "build": "ENV=dev nuxt build",
+        "dev": "ENV=dev nuxt dev --port 1203",
+        "generate": "env=dev nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint . --ext .ts,.vue",
+        "format": "prettier --write .",
+        "start": "nuxt start"
     },
     "devDependencies": {
         "@nuxtjs/eslint-config-typescript": "^12.0.0",
