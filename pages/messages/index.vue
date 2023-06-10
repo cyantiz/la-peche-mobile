@@ -33,7 +33,6 @@ onMounted(() => {
     })
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const sendMsgText = (msg: string) => {
     if (!msg || !msg?.length) return
 
