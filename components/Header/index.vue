@@ -66,7 +66,7 @@ const profile = useProfileStore()
                     <HeaderItem
                         size="tiny"
                         shape="rounded-square"
-                        @click="$router.push({ name: 'Messages' })"
+                        @click="$router.push('/messages')"
                     >
                         <template #button>
                             <PhChatCenteredDots :size="18" weight="bold" />
