@@ -78,7 +78,7 @@ onMounted(async () => {
                     v-for="bookmarked in bookmarkeds"
                     :key="bookmarked.id"
                     :index="1"
-                    :info-with-images="{ ...bookmarked, images: [] }"
+                    :info-with-images="{ ...bookmarked }"
                 />
             </div>
             <div v-else>
