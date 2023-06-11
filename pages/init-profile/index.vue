@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { breakpointsTailwind } from '@vueuse/core'
 import {
     NForm,
     NFormItem,
@@ -14,7 +13,7 @@ import {
     FormValidationError,
     useNotification,
 } from 'naive-ui'
-import { PhSignOut } from 'phosphor-vue'
+import { PhSignOut, PhArrowRight, PhCheck, PhArrowLeft } from 'phosphor-vue'
 import { useAreaStore } from '~/store/area'
 import { useAuthStore } from '~/store/auth'
 import { InitProfileDTO, useProfileStore } from '~/store/profile'
@@ -46,9 +45,7 @@ const area = useAreaStore()
 const profile = useProfileStore()
 const loadingBar = useLoadingBar()
 const notification = useNotification()
-const breakpoints = useBreakpoints(breakpointsTailwind)
 
-const greaterOrEqualMd = breakpoints.greaterOrEqual('md')
 const pending = ref<boolean>(false)
 const currentStep = ref<number>(1)
 
@@ -100,7 +97,11 @@ watch(
     { deep: true }
 )
 
-const areaCode = reactive({
+const areaCode = reactive<{
+    province: string | null
+    district: string | null
+    commune: string | null
+}>({
     province: '48',
     district: '492',
     commune: '20236',
@@ -210,6 +211,7 @@ const handleSteps = () => {
                             ...form4.value,
                         })
                         pending.value = false
+                        location.href = '/'
                     } else {
                         errors.forEach((item) =>
                             item.forEach((error) => {
@@ -229,6 +231,24 @@ onMounted(() => {
     if (!process.client) return
     setTimeout(() => loadingBar.finish(), 1)
 })
+
+watch(
+    () => areaCode.province,
+    (value) => {
+        areaCode.district = null
+        if (!value) return
+        area.fetchDistricts(value)
+    }
+)
+
+watch(
+    () => areaCode.district,
+    (value) => {
+        areaCode.commune = null
+        if (!value) return
+        area.fetchCommunes(value)
+    }
+)
 </script>
 
 <template>
@@ -272,7 +292,7 @@ onMounted(() => {
                     ref="formRef1"
                     class="flex w-full flex-col gap-2"
                     :model="form1"
-                    :label-placement="greaterOrEqualMd ? 'left' : 'top'"
+                    label-placement="top"
                     label-width="120px"
                     label-align="left"
                     :rules="initProfileFormRules1"
@@ -327,7 +347,7 @@ onMounted(() => {
                     ref="formRef2"
                     class="flex w-full flex-col gap-2"
                     :model="form2"
-                    :label-placement="greaterOrEqualMd ? 'left' : 'top'"
+                    label-placement="top"
                     label-width="120px"
                     label-align="left"
                     :rules="initProfileFormRules2"
@@ -399,7 +419,7 @@ onMounted(() => {
                     ref="formRef3"
                     class="flex w-full flex-col gap-2"
                     :model="form3"
-                    :label-placement="greaterOrEqualMd ? 'left' : 'top'"
+                    label-placement="top"
                     label-width="120px"
                     label-align="left"
                     :rules="initProfileFormRules3"
@@ -472,7 +492,7 @@ onMounted(() => {
                     ref="formRef4"
                     class="flex w-full flex-col gap-2"
                     :model="form4"
-                    :label-placement="greaterOrEqualMd ? 'left' : 'top'"
+                    label-placement="top"
                     label-width="120px"
                     label-align="left"
                     :rules="initProfileFormRules4"
@@ -565,15 +585,35 @@ onMounted(() => {
                     </NFormItem>
                 </NForm>
             </div>
-            <div class="mb-4 w-full px-8 md:w-[600px] xl:w-[800px]">
+            <div
+                class="mb-4 flex w-full justify-between gap-2 px-8 md:w-[600px] xl:w-[800px]"
+            >
+                <NButton
+                    v-if="currentStep !== 1"
+                    :loading="pending"
+                    :disabled="pending"
+                    type="default"
+                    size="large"
+                    class="w-1/3"
+                    @click="handleSteps"
+                >
+                    <template #icon>
+                        <PhArrowLeft />
+                    </template>
+                    Previous
+                </NButton>
                 <NButton
                     :loading="pending"
                     :disabled="pending"
                     type="default"
                     size="large"
-                    block
+                    :class="currentStep === 1 ? 'w-full' : 'w-1/3'"
                     @click="handleSteps"
                 >
+                    <template #icon>
+                        <PhCheck v-if="currentStep === 4" />
+                        <PhArrowRight v-else />
+                    </template>
                     <template v-if="currentStep === 4"> Done </template>
                     <template v-else>Next step</template>
                 </NButton>

@@ -41,7 +41,6 @@ declare global {
 
     type IUserInformation = Omit<
         IUser,
-        | 'username'
         | 'cluster'
         | 'isActivated'
         | 'isDeleted'

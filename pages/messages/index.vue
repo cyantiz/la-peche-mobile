@@ -11,7 +11,7 @@ const fireStore = useFirestore()
 const auth = useAuthStore()
 const route = useRoute()
 console.log(route.query)
-const chatId = computed(() => route.query.chatId as string)
+const chatId = computed(() => (route.query.chatId as string) ?? '')
 
 const userChats = ref<Record<string, IUserChat> | undefined>(undefined)
 const currentChatMessages = ref<IChat | undefined>(undefined)
@@ -30,7 +30,7 @@ onMounted(() => {
         (doc) => {
             userChats.value = doc.data()
 
-            if (userChats.value) {
+            if (userChats.value && chatId.value !== '') {
                 unsubscribeChat = fireStore.onSnapShot<IChat>(
                     userChats?.value[chatId.value]?.messages,
                     (doc) => {
@@ -61,7 +61,7 @@ const sendMsgText = (msg: string) => {
         createdAt: Timestamp.now(),
     }
 
-    const docRef = fireStore.doc('chats', currentChatId.value)
+    const docRef = fireStore.doc('chats', chatId.value)
 
     fireStore.updateDoc(docRef, {
         messages: arrayUnion(message),
