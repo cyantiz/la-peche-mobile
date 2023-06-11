@@ -1,0 +1,7 @@
+{
+    "name": "la-peche",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "custom"
+}
