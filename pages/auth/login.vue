@@ -29,7 +29,7 @@ const form = reactive<LoginRequestDto>({
 })
 const pending = ref<boolean>(false)
 
-const { login } = useAuthStore()
+const auth = useAuthStore()
 const { setNotificationPlacement } = useUIStore()
 
 const loadingBar = useLoadingBar()
