@@ -76,6 +76,21 @@ export const useAuthStore = defineStore({
 
             return this.access_token !== ''
         },
+        isAuthMobile(): Boolean {
+            const refreshToken = localStorage.getItem('refresh_token')
+            if (!refreshToken) return false
+
+            try {
+                const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
+
+                if (!refreshTokenPayload) return false
+                if (refreshTokenPayload.exp * 1000 < Date.now()) return false
+            } catch (error) {
+                return false
+            }
+
+            return this.access_token !== ''
+        },
         bearerToken(): string {
             if (!this.access_token) return ''
             return `Bearer ${this.access_token}`
@@ -90,6 +105,19 @@ export const useAuthStore = defineStore({
             useCookie('refresh_token', {
                 sameSite: 'strict',
             }).value = data.refreshToken
+
+            this.access_token = data.accessToken
+            const payload = jwtDecode<AuthPayload>(data.accessToken)
+            this.user = payload
+            location.reload()
+        },
+
+        async loginMobile(formData: LoginRequestDto) {
+            const data = await useApiPost<LoginResponse>('/auth/login', {
+                body: formData,
+            })
+
+            localStorage.setItem('refresh_token', data.refreshToken)
 
             this.access_token = data.accessToken
             const payload = jwtDecode<AuthPayload>(data.accessToken)
@@ -134,10 +162,57 @@ export const useAuthStore = defineStore({
             }
         },
 
+        async refreshTokenMobile() {
+            try {
+                const refreshToken = localStorage.getItem('refresh_token')
+
+                if (!refreshToken) return
+
+                const refreshTokenPayload = jwtDecode<AuthPayload>(refreshToken)
+
+                if (!refreshTokenPayload) {
+                    this.logout()
+                    return
+                }
+
+                if (refreshTokenPayload.exp * 1000 < Date.now()) {
+                    this.logout()
+                    return
+                }
+
+                const data = await useApiPost<{
+                    accessToken: string
+                }>('/auth/refresh', {
+                    method: 'POST',
+                    body: {
+                        refreshToken,
+                    },
+                })
+
+                this.access_token = data.accessToken
+                const payload = jwtDecode<AuthPayload>(data.accessToken)
+
+                this.access_token = data.accessToken
+                this.user = payload
+            } catch (error) {
+                this.logout()
+            }
+        },
+
         async initAuth() {
             this.loading = true
             try {
                 await this.refreshToken()
+            } catch (err) {
+                this.logout()
+            }
+            this.loading = false
+        },
+
+        async initAuthMobile() {
+            this.loading = true
+            try {
+                await this.refreshTokenMobile()
             } catch (err) {
                 this.logout()
             }

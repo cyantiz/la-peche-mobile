@@ -1,5 +1,5 @@
 {
-    "name": "la-peche",
+    "name": "la-peche-ionic",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -10,7 +10,10 @@
         "postinstall": "nuxt prepare",
         "lint": "eslint . --ext .ts,.vue",
         "format": "prettier --write .",
-        "start": "nuxt start"
+        "start": "nuxt start",
+        "ionic:build": "npm run build && npm run generate",
+        "ionic:serve": "npm run start",
+        "ionic:ios": "ionic cap run ios -l --external --host=0.0.0.0 --port=1203"
     },
     "devDependencies": {
         "@nuxtjs/eslint-config-typescript": "^12.0.0",
@@ -33,6 +36,13 @@
         "unplugin-vue-components": "^0.22.12"
     },
     "dependencies": {
+        "@capacitor/app": "5.0.2",
+        "@capacitor/cli": "5.0.4",
+        "@capacitor/core": "5.0.4",
+        "@capacitor/haptics": "5.0.2",
+        "@capacitor/ios": "5.0.4",
+        "@capacitor/keyboard": "5.0.2",
+        "@capacitor/status-bar": "5.0.2",
         "@css-render/vue3-ssr": "^0.15.12",
         "@nuxt/types": "^2.16.3",
         "@nuxtjs/sentry": "^7.2.2",

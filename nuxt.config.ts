@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-    ssr: true,
+    ssr: false,
 
     modules: [
         'nuxt-icon',

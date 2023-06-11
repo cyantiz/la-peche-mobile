@@ -5,12 +5,15 @@
             <div
                 class="flex h-full w-full max-w-[512px] flex-col gap-4 self-start px-8 py-6 lg:w-[512px]"
             >
-                <div class="bg-white">
+                <div class="logo-screen hidden bg-white lg:block">
                     <Logo is-with-text />
+                </div>
+                <div class="logo-mobile bg-white lg:hidden">
+                    <Logo is-with-text size="sm" />
                 </div>
                 <div class="flex h-full w-full flex-col justify-center">
                     <div
-                        class="space-between flex flex-col rounded-xl px-6 py-12 lg:border-[3px] lg:border-solid lg:border-black"
+                        class="space-between flex flex-col rounded-xl lg:border-[3px] lg:border-solid lg:border-black lg:px-6 lg:py-12"
                     >
                         <slot />
                     </div>

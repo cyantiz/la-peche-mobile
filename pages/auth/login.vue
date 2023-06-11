@@ -40,7 +40,7 @@ async function handleLoginRequest() {
     try {
         loadingBar.start()
         pending.value = true
-        await login({
+        await auth.loginMobile({
             ...form,
         })
         loadingBar.finish()

@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
     const auth = useAuthStore()
 
-    const isAuth = computed(() => auth.isAuth)
+    const isAuth = computed(() => auth.isAuthMobile)
 
     if (!isAuth.value && !to.fullPath.startsWith('/auth')) {
         return navigateTo('/auth/login')
