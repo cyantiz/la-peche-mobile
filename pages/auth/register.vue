@@ -11,7 +11,7 @@ import {
     useNotification,
 } from 'naive-ui'
 import { useAuthStore, RegisterRequestDto } from '~/store/auth'
-import { registerFormRules } from '@/utils/validators/auth'
+import { registerFormRules } from '~/utils/form/validators/auth'
 import { useUIStore } from '~/store/ui'
 
 definePageMeta({

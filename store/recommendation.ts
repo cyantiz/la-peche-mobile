@@ -10,10 +10,10 @@ export const useRecommendationStore = defineStore({
         } as IRecommendationStoreState),
     actions: {
         getRecommendations(
-            pageSize = 10
+            quantity = 5
         ): Promise<IUserInformationWithImages[]> {
             return useApiGet('/users/recommended', {
-                query: { pageSize },
+                query: { quantity },
             })
         },
         getMatcheds(
@@ -33,6 +33,43 @@ export const useRecommendationStore = defineStore({
         },
         getBookmarkedCount(): Promise<number> {
             return useApiGet('/users/starred-count')
+        },
+        like(username: string | null): Promise<unknown> {
+            if (!username || !username?.length) {
+                console.log('err no username')
+                return useDelay(1)
+            }
+
+            return useApiPost('/users/like', {
+                body: {
+                    username,
+                },
+            })
+        },
+        dislike(username: string | null): Promise<unknown> {
+            console.log('username', username)
+            if (!username || !username?.length) {
+                console.log('err no username')
+                return useDelay(1)
+            }
+
+            return useApiPost('/users/skip', {
+                body: {
+                    username,
+                },
+            })
+        },
+        star(username: string | null): Promise<unknown> {
+            if (!username || !username?.length) {
+                console.log('err no username')
+                return useDelay(1)
+            }
+
+            return useApiPost('/users/star', {
+                body: {
+                    username,
+                },
+            })
         },
     },
 

@@ -86,7 +86,7 @@ function expandIcon() {
             <div class="info flex w-full flex-col items-center gap-3">
                 <div class="flex overflow-hidden rounded-lg">
                     <Avatar
-                        :src="profile.myAvatar?.url"
+                        :src="profile.myAvatarUrl"
                         :size="collapsed ? 40 : 192"
                     />
                 </div>

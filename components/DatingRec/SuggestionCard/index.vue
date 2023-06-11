@@ -117,16 +117,17 @@ const handleMove = (x: number, y: number) => {
     style.transform = `translate(${properties.offsetX}px, ${properties.offsetY}px) rotate(${rotate}deg)`
 }
 
-const dismiss = (direction: 1 | -1) => {
+const dismiss = (direction: 1 | -1 | 0) => {
+    const moveDirection = [1, 0].includes(direction) ? 1 : -1
     properties.startPoint = null
     document.removeEventListener('mouseup', handleMouseUp)
     document.removeEventListener('mousemove', handleMouseMove)
     document.removeEventListener('touchend', handleTouchEnd)
     document.removeEventListener('touchmove', handleTouchMove)
     style.transition = 'transform 1s'
-    style.transform = `translate(${direction * window.innerWidth * 1.5}px, ${
-        properties.offsetY
-    }px) rotate(${45 * direction}deg)`
+    style.transform = `translate(${
+        moveDirection * window.innerWidth * 1.5
+    }px, ${properties.offsetY}px) rotate(${45 * direction}deg)`
     cardRef.value.classList.add('dismissing')
     setTimeout(() => {
         cardRef.value.remove()
@@ -139,6 +140,9 @@ const dismiss = (direction: 1 | -1) => {
     }
     if (direction === -1) {
         emit('dislike')
+    }
+    if (direction === 0) {
+        emit('star')
     }
 }
 
@@ -239,7 +243,11 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.location"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <PhMapPin weight="fill" size="18" />
+                            <div
+                                class="flex w-[18px] items-center justify-center"
+                            >
+                                <PhMapPin weight="fill" size="18" />
+                            </div>
                             {{
                                 removeAreaPrefix(
                                     infoWithImages.location
@@ -253,7 +261,12 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.education"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <PhGraduationCap weight="fill" size="18" />
+                            <div
+                                class="flex w-[18px] items-center justify-center"
+                            >
+                                <PhGraduationCap weight="fill" size="18" />
+                            </div>
+
                             {{ infoWithImages.education }}
                         </span>
                     </div>
@@ -262,16 +275,10 @@ const isDraggingToDislike = computed(() => {
             <div class="actions flex items-start gap-6">
                 <DatingRecActionButton
                     type="dislike"
-                    @button-click="$emit('dismiss'), $emit('dislike')"
+                    @button-click="dismiss(-1)"
                 />
-                <DatingRecActionButton
-                    type="star"
-                    @button-click.stop="$emit('star')"
-                />
-                <DatingRecActionButton
-                    type="like"
-                    @button-click="$emit('dismiss'), $emit('like')"
-                />
+                <DatingRecActionButton type="star" @button-click="dismiss(0)" />
+                <DatingRecActionButton type="like" @button-click="dismiss(1)" />
             </div>
         </div>
     </ClientOnly>
@@ -284,5 +291,6 @@ const isDraggingToDislike = computed(() => {
         box-shadow: none;
         overflow: hidden;
     }
+    z-index: var(--index);
 }
 </style>

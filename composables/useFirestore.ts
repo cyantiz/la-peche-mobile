@@ -12,6 +12,8 @@ import {
     DocumentSnapshot,
     updateDoc as _updateDoc,
     UpdateData,
+    SetOptions,
+    PartialWithFieldValue,
 } from 'firebase/firestore'
 export default function useFirestore() {
     const { $firestore } = useNuxtApp() as unknown as { $firestore: Firestore }
@@ -32,13 +34,12 @@ export default function useFirestore() {
         return _doc($firestore, path, ...pathSegments)
     }
 
-    const setDoc = async (
-        collectionPath: string,
-        docPath: string,
-        data: any
+    const setDoc = <T>(
+        reference: DocumentReference<T>,
+        data: PartialWithFieldValue<T>,
+        options: SetOptions
     ) => {
-        const docRef = doc(collectionPath, docPath)
-        await _setDoc(docRef, data)
+        return _setDoc(reference, data, options)
     }
 
     const onSnapShot = <T>(

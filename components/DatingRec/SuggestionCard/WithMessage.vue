@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { serverTimestamp } from '@firebase/firestore'
+import { useLoadingBar } from 'naive-ui'
+import { useAuthStore } from '~/store/auth'
+import { useProfileStore } from '~/store/profile'
+
 const props = withDefaults(
     defineProps<{
         infoWithImages: IUserInformationWithImages
@@ -10,11 +15,82 @@ const props = withDefaults(
     }
 )
 
+const fireStore = useFirestore()
+const auth = useAuthStore()
+const profile = useProfileStore()
+
+const loadingBar = useLoadingBar()
+
 const age = computed(() => {
     return (
         useNow().value.getFullYear() - (props.infoWithImages.yearOfBirth ?? 0)
     )
 })
+
+const handleMessage = async () => {
+    const { id: chatUserId, name, images, username } = props.infoWithImages
+    const chatId = [auth.user.id, chatUserId].sort((a, b) => a - b).join('-')
+
+    const doc = await fireStore.getDoc(fireStore.doc('chats', chatId))
+    loadingBar.start()
+    if (!doc.exists()) {
+        await fireStore.setDoc(
+            fireStore.doc('chats', chatId),
+            { messages: [] },
+            {}
+        )
+
+        const userChatsDoc1 = await fireStore.getDoc(
+            fireStore.doc('userChats', auth.user.id.toString())
+        )
+        const userChatsDoc2 = await fireStore.getDoc(
+            fireStore.doc('userChats', chatUserId.toString())
+        )
+        if (!userChatsDoc1.exists()) {
+            await fireStore.setDoc(
+                fireStore.doc('userChats', auth.user.id.toString()),
+                {},
+                {}
+            )
+        }
+        if (!userChatsDoc2.exists()) {
+            await fireStore.setDoc(
+                fireStore.doc('userChats', chatUserId.toString()),
+                {},
+                {}
+            )
+        }
+
+        await fireStore.updateDoc(
+            fireStore.doc('userChats', auth.user.id.toString()),
+            {
+                [chatId + '.userInfo']: {
+                    id: chatUserId,
+                    name,
+                    username,
+                    avatar: images.at(0)?.url,
+                },
+                [chatId + '.date']: serverTimestamp(),
+                [chatId + '.messages']: fireStore.doc('chats', chatId),
+            }
+        )
+
+        await fireStore.updateDoc(
+            fireStore.doc('userChats', chatUserId.toString()),
+            {
+                [chatId + '.userInfo']: {
+                    id: auth.user.id,
+                    name: auth.user.name,
+                    username: auth.user.username,
+                    avatar: profile.myAvatarUrl,
+                },
+                [chatId + '.date']: serverTimestamp(),
+                [chatId + '.messages']: fireStore.doc('chats', chatId),
+            }
+        )
+    }
+    useRouter().push(`/messages?chatId=${chatId}`)
+}
 </script>
 
 <template>
@@ -69,7 +145,10 @@ const age = computed(() => {
                     </div>
                 </div>
                 <div class="actions flex items-start gap-6">
-                    <DatingRecActionButton type="message" />
+                    <DatingRecActionButton
+                        type="message"
+                        @button-click="handleMessage"
+                    />
                 </div>
             </div>
         </div>
