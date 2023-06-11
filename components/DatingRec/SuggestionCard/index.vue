@@ -243,7 +243,9 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.location"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <div class="w-[18px]">
+                            <div
+                                class="flex w-[18px] items-center justify-center"
+                            >
                                 <PhMapPin weight="fill" size="18" />
                             </div>
                             {{
@@ -259,7 +261,9 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.education"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <div class="w-[18px]">
+                            <div
+                                class="flex w-[18px] items-center justify-center"
+                            >
                                 <PhGraduationCap weight="fill" size="18" />
                             </div>
 
