@@ -45,11 +45,7 @@ watch(
                     class="flex cursor-pointer items-center gap-2 rounded-lg bg-white px-4 py-2 shadow-md transition-all duration-200 hover:-translate-y-0.5"
                     @click="$router.push('/profile')"
                 >
-                    <Avatar
-                        :size="42"
-                        circle
-                        :src="profileStore.myAvatar?.url"
-                    />
+                    <Avatar :size="42" circle :src="profileStore.myAvatarUrl" />
                     <div>
                         <p class="text-base font-bold">
                             {{ auth.user?.name }}

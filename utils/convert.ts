@@ -1,7 +1,7 @@
 export function array2NaiveOptions(array: any[]) {
     return array.map((item) => {
         return {
-            label: item,
+            label: item.toString(),
             value: item,
         }
     })

@@ -11,7 +11,7 @@ import {
     useNotification,
 } from 'naive-ui'
 import { useAuthStore, RequestResetPasswordDto } from '~/store/auth'
-import { requestResetPasswordFromRules } from '@/utils/validators/auth'
+import { requestResetPasswordFromRules } from '~/utils/form/validators/auth'
 import { useUIStore } from '~/store/ui'
 
 definePageMeta({

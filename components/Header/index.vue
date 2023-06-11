@@ -50,7 +50,7 @@ const profile = useProfileStore()
                             <template #button>
                                 <div class="flex overflow-hidden">
                                     <Avatar
-                                        :src="profile.myAvatar?.url"
+                                        :src="profile.myAvatarUrl"
                                         :size="40"
                                     />
                                 </div>

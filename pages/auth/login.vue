@@ -12,7 +12,7 @@ import {
     useNotification,
 } from 'naive-ui'
 import { useAuthStore, LoginRequestDto } from '~/store/auth'
-import { loginFormRules } from '@/utils/validators/auth'
+import { loginFormRules } from '~/utils/form/validators/auth'
 import { useUIStore } from '~/store/ui'
 
 definePageMeta({

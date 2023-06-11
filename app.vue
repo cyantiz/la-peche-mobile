@@ -8,13 +8,24 @@ import ThemeProvider from './theme/ThemeProvider.vue'
 defineProps<{}>()
 
 const area = useAreaStore()
-
+const profile = useProfileStore()
+const auth = useAuthStore()
+const route = useRoute()
 if (process.client) {
     area.init()
 
-    if (useAuthStore().user.id) {
-        await useProfileStore().init(useAuthStore().user.username)
+    if (auth.user.id) {
+        await profile.initStore(useAuthStore().user.username)
         await useNotificationStore().init()
+
+        if (
+            profile.needInitProfile({
+                ...profile.myInformationWithImages,
+            }) &&
+            route.path !== '/init-profile'
+        ) {
+            location.href = '/init-profile'
+        }
     }
 }
 

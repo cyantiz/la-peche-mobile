@@ -9,11 +9,15 @@ defineProps<{}>()
 const loadingBar = useLoadingBar()
 const fireStore = useFirestore()
 const auth = useAuthStore()
+const route = useRoute()
+console.log(route.query)
+const chatId = computed(() => route.query.chatId as string)
 
 const userChats = ref<Record<string, IUserChat> | undefined>(undefined)
-const currentChatId = ref<string>('')
 const currentChatMessages = ref<IChat | undefined>(undefined)
 const loadingMessages = ref<boolean>(false)
+
+let unsubscribeChat = () => {}
 
 onMounted(() => {
     if (!process.client) return
@@ -25,12 +29,27 @@ onMounted(() => {
         docRef,
         (doc) => {
             userChats.value = doc.data()
+
+            if (userChats.value) {
+                unsubscribeChat = fireStore.onSnapShot<IChat>(
+                    userChats?.value[chatId.value]?.messages,
+                    (doc) => {
+                        loadingMessages.value = false
+                        currentChatMessages.value = doc.data()
+                    }
+                )
+            }
         }
     )
 
     onUnmounted(() => {
         unsubscribe()
+        unsubscribeChat()
     })
+})
+
+onUpdated(() => {
+    loadingBar.finish()
 })
 
 const sendMsgText = (msg: string) => {
@@ -56,17 +75,15 @@ const sendMsgImage = (url: string) => {
         createdAt: Timestamp.now(),
     }
 
-    const docRef = fireStore.doc('chats', currentChatId.value)
+    const docRef = fireStore.doc('chats', chatId.value)
 
     fireStore.updateDoc(docRef, {
         messages: arrayUnion(message),
     })
 }
 
-let unsubscribeChat = () => {}
-
 watch(
-    () => currentChatId.value,
+    () => chatId.value,
     async (newVal) => {
         loadingMessages.value = true
         if (!userChats.value) return
@@ -94,8 +111,8 @@ watch(
         <div v-else class="flex h-full gap-2">
             <ChatList
                 :user-chats="userChats"
-                :current-chat-id="currentChatId"
-                @select-chat="currentChatId = $event"
+                :current-chat-id="chatId"
+                @select-chat="$router.push({ query: { chatId: $event } })"
             />
             <div class="h-full w-0.5 bg-gray-200"></div>
             <template v-if="loadingMessages">
@@ -105,7 +122,7 @@ watch(
             <template v-else>
                 <ChatBox
                     v-if="currentChatMessages"
-                    :chat-user-info="userChats[currentChatId].userInfo"
+                    :chat-user-info="userChats[chatId].userInfo"
                     :messages="currentChatMessages?.messages"
                     @submit-message-text="sendMsgText"
                     @submit-message-image="sendMsgImage"

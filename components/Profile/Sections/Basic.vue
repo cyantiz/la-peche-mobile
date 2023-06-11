@@ -242,7 +242,7 @@ const updateBasicInfo = async (closeModal: () => void) => {
                         :show-label="true"
                         label="Year of birth"
                         label-placement="left"
-                        path="gender"
+                        path="birth"
                     >
                         <NSelect
                             v-model:value="patchingData.yearOfBirth"
