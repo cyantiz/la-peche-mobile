@@ -47,8 +47,8 @@ onMounted(async () => {
     pending.value = false
 })
 
-const dismiss = async (_id: number) => {
-    console.log('b', recommendationList)
+const dismiss = async (_id: number | undefined) => {
+    if (!_id) return
 
     // find and remove item have id === input _id in recommendationList
     await useDelay(1000)
@@ -68,6 +68,26 @@ const dismiss = async (_id: number) => {
 
         recommendationList.value = _.uniqBy(newList, 'id')
     }
+}
+
+const handleLike = () => {
+    if (!detailInfo.value) return
+    dismiss(detailInfo.value?.id)
+    recommendationStore.like(detailInfo.value?.username)
+    showDetail.value = false
+}
+
+const handleDislike = async () => {
+    if (!detailInfo.value) return
+    dismiss(detailInfo.value?.id)
+    await recommendationStore.dislike(detailInfo.value?.username)
+    showDetail.value = false
+}
+const handleStar = async () => {
+    if (!detailInfo.value) return
+    dismiss(detailInfo.value?.id)
+    await recommendationStore.star(detailInfo.value?.username)
+    showDetail.value = false
 }
 </script>
 
@@ -102,6 +122,9 @@ const dismiss = async (_id: number) => {
         :images="detailImages"
         :show="showDetail"
         @close="showDetail = false"
+        @like="handleLike"
+        @dislike="handleDislike"
+        @star="handleStar"
     />
 </template>
 

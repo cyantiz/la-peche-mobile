@@ -243,7 +243,9 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.location"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <PhMapPin weight="fill" size="18" />
+                            <div class="w-[18px]">
+                                <PhMapPin weight="fill" size="18" />
+                            </div>
                             {{
                                 removeAreaPrefix(
                                     infoWithImages.location
@@ -257,7 +259,10 @@ const isDraggingToDislike = computed(() => {
                             v-if="infoWithImages.education"
                             class="flex items-center gap-2.5 text-base font-medium text-gray-200"
                         >
-                            <PhGraduationCap weight="fill" size="18" />
+                            <div class="w-[18px]">
+                                <PhGraduationCap weight="fill" size="18" />
+                            </div>
+
                             {{ infoWithImages.education }}
                         </span>
                     </div>

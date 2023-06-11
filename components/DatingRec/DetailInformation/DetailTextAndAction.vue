@@ -18,6 +18,8 @@ import {
 const props = defineProps<{
     info: IUserInformation
 }>()
+defineEmits(['like', 'dislike', 'star'])
+
 const age = computed(() => {
     return useNow().value.getFullYear() - (props.info?.yearOfBirth ?? 0)
 })
@@ -135,10 +137,22 @@ const age = computed(() => {
         <div
             class="actions absolute bottom-3 right-0 flex w-full justify-center gap-8 lg:bottom-0 lg:mb-0"
         >
-            <DatingRecActionButton type="star" :shadow="false" />
+            <DatingRecActionButton
+                type="star"
+                :shadow="false"
+                @button-click="$emit('star')"
+            />
             <div class="flex gap-6">
-                <DatingRecActionButton type="dislike" :shadow="false" />
-                <DatingRecActionButton type="like" :shadow="false" />
+                <DatingRecActionButton
+                    type="dislike"
+                    :shadow="false"
+                    @button-click="$emit('dislike')"
+                />
+                <DatingRecActionButton
+                    type="like"
+                    :shadow="false"
+                    @button-click="$emit('like')"
+                />
             </div>
         </div>
     </div>

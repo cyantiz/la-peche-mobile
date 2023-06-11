@@ -8,7 +8,7 @@ defineProps<{
     show: boolean
 }>()
 
-defineEmits(['close'])
+defineEmits(['close', 'like', 'dislike', 'star'])
 
 const breakPoints = useBreakpoints(breakpointsTailwind)
 const lg = breakPoints.smallerOrEqual('lg')
@@ -44,7 +44,13 @@ const sm = breakPoints.smallerOrEqual('sm')
 
                 <ClientOnly>
                     <SkeletonDatingRecDetailText v-show="!info" />
-                    <DatingRecDetailTextAndAction v-if="info" :info="info" />
+                    <DatingRecDetailTextAndAction
+                        v-if="info"
+                        :info="info"
+                        @dislike="$emit('dislike')"
+                        @like="$emit('like')"
+                        @star="$emit('star')"
+                    />
                 </ClientOnly>
             </div>
         </NCard>
